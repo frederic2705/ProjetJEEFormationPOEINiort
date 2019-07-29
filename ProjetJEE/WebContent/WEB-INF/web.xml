@@ -9,4 +9,32 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+    <servlet-name>accueil</servlet-name>
+    <jsp-file>/WEB-INF/jsp/accueil.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>accueil</servlet-name>
+    <url-pattern>/accueil</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>nos_plats</servlet-name>
+    <jsp-file>/WEB-INF/jsp/nos_plats.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>nos_plats</servlet-name>
+    <url-pattern>/nos_plats</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>connexion</servlet-name>
+    <jsp-file>/WEB-INF/jsp/connexion.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>connexion</servlet-name>
+    <url-pattern>/connexion</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
