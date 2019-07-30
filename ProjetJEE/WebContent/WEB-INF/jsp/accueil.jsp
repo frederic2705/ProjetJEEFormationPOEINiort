@@ -51,7 +51,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="card">
-						<img class="card-img-top" alt="Image resto1" src="./img/resto1.jpg" style="min-height:300px;" />
+						<img class="card-img-top" alt="Image resto1" src="./img/resto1.jpg" style="min-height:200px;" />
 						<div class="card-block">
 							<h5 class="card-title">
 								Resto 1
@@ -67,7 +67,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="card">
-						<img class="card-img-top" alt="Image resto2" src="./img/resto2.jpeg" style="min-height:300px;" />
+						<img class="card-img-top" alt="Image resto2" src="./img/resto2.jpeg" style="min-height:200px;" />
 						<div class="card-block">
 							<h5 class="card-title">
 								Resto 2

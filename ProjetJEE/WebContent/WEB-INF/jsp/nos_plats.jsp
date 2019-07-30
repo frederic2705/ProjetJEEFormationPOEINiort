@@ -11,7 +11,7 @@
        
 <meta charset="UTF-8">
 
-<title>Accueil</title>
+<title>Nos plats</title>
 </head>
 	
 <body>

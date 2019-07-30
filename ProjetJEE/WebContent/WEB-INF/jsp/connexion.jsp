@@ -8,7 +8,7 @@
           
 <meta charset="UTF-8">
 
-<title>Accueil</title>
+<title>Connexion</title>
 </head>
 	
 <body>
