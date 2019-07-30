@@ -40,7 +40,8 @@ public class CommentaireManager
 	public List<Commentaire> getCommentairesParUser(User user) throws Exception
 	{
 		List<Commentaire> retour = null;		
-		retour = commentaireDAO.selectAllByUser(user);		
+		retour = commentaireDAO.selectAllByUser(user);
+		
 		return retour;
 	}
 	
