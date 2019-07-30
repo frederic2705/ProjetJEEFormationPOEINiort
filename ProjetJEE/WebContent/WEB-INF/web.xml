@@ -9,31 +9,28 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
   <servlet>
-    	<description>inscription JSP</description>
-   	 	<servlet-name>inscription</servlet-name>
-    	<jsp-file>/WEB-INF/jsp/inscription.jsp</jsp-file>
+    <description>inscription JSP</description>
+    <servlet-name>inscription</servlet-name>
+    <jsp-file>/WEB-INF/jsp/inscription.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>inscription</servlet-name>
     <url-pattern>/inscription</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
-    	<description>Mon compte JSP</description>
-   	 	<servlet-name>monCompte</servlet-name>
-    	<jsp-file>/WEB-INF/jsp/monCompte.jsp</jsp-file>
+  <servlet>
+    <description>Mon compte JSP</description>
+    <servlet-name>monCompte</servlet-name>
+    <jsp-file>/WEB-INF/jsp/monCompte.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>monCompte</servlet-name>
     <url-pattern>/monCompte</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
-    	<description>ajouter un plat JSP</description>
-   	 	<servlet-name>ajouterUnPlat</servlet-name>
-    	<jsp-file>/WEB-INF/jsp/ajouterUnPlat.jsp</jsp-file>
+  <servlet>
+    <description>ajouter un plat JSP</description>
+    <servlet-name>ajouterUnPlat</servlet-name>
+    <jsp-file>/WEB-INF/jsp/ajouterUnPlat.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>ajouterUnPlat</servlet-name>
