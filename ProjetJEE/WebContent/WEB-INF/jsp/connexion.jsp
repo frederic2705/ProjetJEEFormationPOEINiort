@@ -46,6 +46,7 @@
 	</nav>
 <!-- FIN Nav -->
 
+<br>
 <form method="post" action="<%= request.getContextPath()%>/ServletConnexion">
 	<p>
 		<label for="email">email : </label>
@@ -59,6 +60,7 @@
 	<input type="submit" value="Valider">
 </form>
 
+<br>
 <p>Erreur de saisie... Veuillez remplir les champs correctement</p>
 
 </body>

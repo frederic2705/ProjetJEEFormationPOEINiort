@@ -37,4 +37,13 @@
     <url-pattern>/connexion</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>NewFile</servlet-name>
+    <jsp-file>/WEB-INF/jsp/NewFile.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewFile</servlet-name>
+    <url-pattern>/NewFile</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
