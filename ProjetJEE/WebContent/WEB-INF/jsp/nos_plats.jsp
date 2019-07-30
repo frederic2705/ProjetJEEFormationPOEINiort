@@ -4,10 +4,12 @@
 <html>
 <head>
 
-	<link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ 
+<!-- 	<link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
     <script src="jquery/jquery-3.2.1.js"></script>
-    <script src="bootstrap-3.3.7/js/bootstrap.js"></script>       
+    <script src="bootstrap-3.3.7/js/bootstrap.js"></script>    -->    
        
 <meta charset="UTF-8">
 
@@ -16,66 +18,38 @@
 	
 <body>
 
-<!-- <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<ul class="nav">
-				<li class="nav-item">
-					<a class="nav-link active" href="#">Accueil</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Nos plats</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Connexion</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Inscription</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Mon compte</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Ajouter un plat</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Forum</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</div> -->
-
-<header class="container-fluid header">
-    <!-- 960 px -->
-    <div class="container-fluid">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                </div>
-                <div class="collapse navbar-collapse navbar-left" id="navbar">
-                    <ul class="nav navbar-nav">
-                        <!-- liens d'ancrage -->
-                        <li><a href="#">Accueil</a></li>
-                        <li><a href="#learn">Nos plats</a></li>
-                        <li><a href="#training">Connexion</a></li>
-                        <li><a href="#registration">Inscription</a></li>
-                        <li><a href="#account">Mon compte</a></li>
-                        <li><a href="#add">Ajouter un plat</a></li>
-                        <li><a href="#forum">Forum</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-</header>
-
+<!-- Nav -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" 
+	  aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarText">
+	    <ul class="navbar-nav mr-auto">
+	    
+	      <li class="nav-item active">
+	        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Nos plats</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Connexion</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Inscription</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Mon Compte</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Ajouter un plat</a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+<!-- FIN Nav -->
 
 <div class="container-fluid">
 	<div class="row">
@@ -206,3 +180,6 @@
 		</div>
 	</div>
 </div>
+
+</body>
+</html>
