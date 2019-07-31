@@ -11,9 +11,10 @@ import projetjee.bo.Plat;
 import projetjee.bo.User;
 
 public class UserDAOJdbcImpl implements UserDAO {
-	public static final String INSERT="INSERT INTO USERS (nom, prenom, mail, mdp) VALUES (?,?,?,?);";
+	public static final String INSERT="INSERT INTO USERS (nom, prenom, mail, mdp, roles_id) VALUES (?,?,?,?,?);";
 	private static final String UPDATE = "UPDATE USERS set mail=? , mdp=? where id=?";
 	private static final String SELECT="SELECT (mail, mdp) FROM USERS;"; 
+	
 	
 	public void insert(User user) throws Exception {
 		try(Connection cnx = ConnectionProvider.getConnection())
@@ -23,6 +24,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 			pstmt.setString(2, user.getPrenom());
 			pstmt.setString(3, user.getMail());
 			pstmt.setString(4, user.getMdp());
+			pstmt.setInt(5, 1);
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if(rs.next())
@@ -70,4 +72,6 @@ public class UserDAOJdbcImpl implements UserDAO {
 		return users;
 
 	}
+	
+	
 }

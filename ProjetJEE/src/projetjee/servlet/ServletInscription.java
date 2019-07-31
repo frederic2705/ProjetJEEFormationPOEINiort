@@ -1,19 +1,19 @@
 package projetjee.servlet;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.SecureRandom;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import projetjee.bll.UserManager;
+import projetjee.bo.User;
 
 /**
  * Servlet implementation class ServletInscription
@@ -67,7 +67,20 @@ public class ServletInscription extends HttpServlet {
 		
 		if ((b == true) & (mdp.equals(mdp2)))
 		{
-			response.sendRedirect("accueil");
+			UserManager rm = new UserManager ();
+			try 
+			{
+				User userInsere = rm.ajouter(nom, prenom, mail, mdp, "user");
+			} 
+			catch (Exception e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			RequestDispatcher rd = request.getRequestDispatcher("accueil");
+			rd.forward(request, response);
+			
 		}
 		else
 		{
