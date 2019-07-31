@@ -35,11 +35,11 @@
   <servlet-mapping>
     <servlet-name>ajouterUnPlat</servlet-name>
     <url-pattern>/ajouterUnPlat</url-pattern>
-    </servlet-mapping>  
-    <servlet> 
+  </servlet-mapping>
+  <servlet>
     <servlet-name>accueil</servlet-name>
     <jsp-file>/WEB-INF/jsp/accueil.jsp</jsp-file>
-	</servlet> 
+  </servlet>
   <servlet-mapping>
     <servlet-name>accueil</servlet-name>
     <url-pattern>/accueil</url-pattern>

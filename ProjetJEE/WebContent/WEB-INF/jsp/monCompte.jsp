@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="projetjee.bo.User" %>
+    <%@ page import="projetjee.bo.Commentaire" %>
+    <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,21 +52,23 @@
 			<form action="">
 				<div class="col-md-12">
 					<label>Mail :</label>
-					<p>uneadresse@mail.fr</p>
+					<p><% request.getAttribute("mail"); %>uneadresse@mail.fr</p>
 					<input type="email" class="form-control" id="mail" />
 					<input type="button" value="Modifier">
 				</div>
 				<div class="col-md-12">
-					<label>Mot de passe :</label>
+					<label><% request.getAttribute("mdp");%>Mot de passe :</label>
 					<input type="password" id="mdp" value="password" name="mdp">
 					<input type="button" value="Modifier">
 				</div>
+				<% for(Commentaire commentaire : (List<Commentaire>)request.getAttribute("commentaire")){ %>
 				<div class="col-md-12">
 					<label>Message :</label>
 					<figure>
-						<pre>Ceci est un test</pre>
+						<pre><% commentaire.getContenu(); %></pre>
 					</figure>
 				</div>
+				<%} %>
 				</form>
 			</div>
 		</div>

@@ -27,7 +27,7 @@ public class UserManager {
 		return user;
 	}
 	
-	public List<User> getAll() throws Exception {
-		return dao.select();
+	public User getUser(int id) throws Exception {
+		return dao.select(id);
 	}
 }

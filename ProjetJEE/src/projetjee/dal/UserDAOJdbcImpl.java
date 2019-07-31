@@ -13,7 +13,7 @@ import projetjee.bo.User;
 public class UserDAOJdbcImpl implements UserDAO {
 	public static final String INSERT="INSERT INTO USERS (nom, prenom, mail, mdp) VALUES (?,?,?,?);";
 	private static final String UPDATE = "UPDATE USERS set mail=? , mdp=? where id=?";
-	private static final String SELECT="SELECT (mail, mdp) FROM USERS;"; 
+	private static final String SELECT="SELECT nom, prenom, mail, mdp FROM USERS where id=?;"; 
 	
 	public void insert(User user) throws Exception {
 		try(Connection cnx = ConnectionProvider.getConnection())
@@ -46,21 +46,18 @@ public class UserDAOJdbcImpl implements UserDAO {
 		}
 	}
 	
-	public List<User> select()
+	public User select(int id)
 	{
-		List<User> users = new ArrayList<>();
+		User users = null;
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT, PreparedStatement.RETURN_GENERATED_KEYS);
 			ResultSet rs = pstmt.executeQuery();
-			
+			pstmt.setInt(1, id);
 		
 			while(rs.next()) {
 				
-				User tmp = new User();
-				tmp.setMail( rs.getString("mail"));
-				tmp.setMdp(rs.getString("mdp"));
-				users.add(tmp);
+				User tmp = new User(id,  rs.getString("nom"), rs.getString("prenom"), rs.getString("mail"), rs.getString("mdp"), "user");				
 				}
 				
 			} catch (SQLException e) {
