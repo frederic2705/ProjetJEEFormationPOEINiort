@@ -10,7 +10,6 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-<<<<<<< HEAD
     <description>inscription JSP</description>
     <servlet-name>inscription</servlet-name>
     <jsp-file>/WEB-INF/jsp/inscription.jsp</jsp-file>
@@ -36,7 +35,9 @@
   <servlet-mapping>
     <servlet-name>ajouterUnPlat</servlet-name>
     <url-pattern>/ajouterUnPlat</url-pattern>
-=======
+  </servlet-mapping>
+  <servlet>
+    <description>accueilt JSP</description>
     <servlet-name>accueil</servlet-name>
     <jsp-file>/WEB-INF/jsp/accueil.jsp</jsp-file>
   </servlet>
@@ -59,6 +60,5 @@
   <servlet-mapping>
     <servlet-name>connexion</servlet-name>
     <url-pattern>/connexion</url-pattern>
->>>>>>> branch 'dev' of https://github.com/frederic2705/ProjetJEEFormationPOEINiort.git
   </servlet-mapping>
 </web-app>

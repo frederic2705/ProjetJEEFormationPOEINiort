@@ -67,20 +67,21 @@
 							Mail :
 						</label>
 						<input type="email" class="form-control" id="mail" name="mail" />
+						
 					</div>
 					
 					<div class="form-group">
 						<label for="mdp">
 							Mot de passe :
 						</label>
-						<input type="password" class="form-control" id="mdp" name="mdp"/>
+						<input type="password" class="form-control" maxlength="32" id="mdp" name="mdp"/>
 					</div>
 					
 					<div class="form-group">
 						<label for="mdp2">
-							Mot de passe :
+							Confirmation de mot de passe :
 						</label>
-						<input type="password" class="form-control" id="mdp2" name="mdp2" />
+						<input type="password" class="form-control" id="mdp2" maxlength="32" name="mdp2" />
 					</div>
 					
 					<div class="form-group">
