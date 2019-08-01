@@ -19,6 +19,7 @@
     <servlet-name>inscription</servlet-name>
     <url-pattern>/inscription</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <description>Mon compte JSP</description>
     <servlet-name>monCompte</servlet-name>
@@ -28,6 +29,7 @@
     <servlet-name>monCompte</servlet-name>
     <url-pattern>/monCompte</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <description>ajouter un plat JSP</description>
     <servlet-name>ajouterUnPlat</servlet-name>
@@ -38,9 +40,9 @@
     <url-pattern>/ajouterUnPlat</url-pattern>
   </servlet-mapping>
   
+
   <servlet>
     <description>accueilt JSP</description>
-
     <servlet-name>accueil</servlet-name>
     <jsp-file>/WEB-INF/jsp/accueil.jsp</jsp-file>
 	</servlet> 
@@ -48,6 +50,7 @@
     <servlet-name>accueil</servlet-name>
     <url-pattern>/accueil</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>nos_plats</servlet-name>
     <jsp-file>/WEB-INF/jsp/nos_plats.jsp</jsp-file>
@@ -56,6 +59,7 @@
     <servlet-name>nos_plats</servlet-name>
     <url-pattern>/nos_plats</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>connexion</servlet-name>
     <jsp-file>/WEB-INF/jsp/connexion.jsp</jsp-file>
@@ -64,4 +68,5 @@
     <servlet-name>connexion</servlet-name>
     <url-pattern>/connexion</url-pattern>
   </servlet-mapping>
+  
 </web-app>
