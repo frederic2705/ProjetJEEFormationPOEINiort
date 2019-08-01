@@ -1,5 +1,6 @@
 
 var descriptifDiv = document.getElementById("descriptif");
+var carouselDiv = document.getElementById("carousel");
 
 function createXHRForAffichage() {
 	    if (window.XMLHttpRequest) {
@@ -13,6 +14,7 @@ function createXHRForAffichage() {
 	            if (xhr.status == 200) {
 	            	console.log(xhr.responseText);
 	            	afficherDescriptif(xhr.responseText);
+	            	afficherCarousel(xhr.responseText);
 	            } else {
 	                echec(xhr.status, xhr.responseText);
 	            }
@@ -41,6 +43,15 @@ function createXHRForOthers() {
     return xhr;
 }
 
+function afficherCarousel (response) {
+	carouselDiv.innerHTML = "";
+	var responseJSON = JSON.parse(response);
+	for(i=0; i<responseJSON.length; i++) {
+		carouselDiv.appendChild(createCarousel(responseJSON[i]));
+	}
+	alert("test2");
+}
+
 function afficher() {
 	var xhr = createXHRForAffichage();
 	xhr.open("GET", "/ProjetJEE/rest/plats", true);
@@ -54,6 +65,21 @@ function afficherDescriptif(response) {
 	for(i=0; i<responseJSON.length; i++) {
 		descriptifDiv.appendChild(createDescriptif(responseJSON[i]));
 	}
+}
+
+function createCarousel(element) {
+	var div = document.createElement("div");
+	div.id = "image_"+element.id;
+	var img = document.createElement("img");
+	alert(element.image);
+	var image = element.image.replace("\\\\", "\\");
+	alert(image);
+	img.src = image;
+	img.style = "max-width:100%;";
+	img.onclick=function() {afficher(element.id)};
+	
+	carouselDiv.appendChild(div);
+	document.getElementById("image_"+element.id).appendChild(img);
 }
 
 function echec(statut, response) {

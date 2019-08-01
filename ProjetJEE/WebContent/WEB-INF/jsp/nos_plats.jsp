@@ -14,7 +14,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body onload="afficher(0)">
+<body onload="afficher()">
 
 <!-- Nav -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -55,7 +55,7 @@
 		<div class="col-md-8"> 
 		  <div id="myCarousel" class="carousel slide" data-interval="false">
 		    <!-- Indicators -->
-		    <ol class="carousel-indicators">
+		    <!-- <ol class="carousel-indicators">
 		      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 		      <li data-target="#myCarousel" data-slide-to="1"></li>
 		      <li data-target="#myCarousel" data-slide-to="2"></li>
@@ -64,11 +64,11 @@
 		      <li data-target="#myCarousel" data-slide-to="5"></li>
 		      <li data-target="#myCarousel" data-slide-to="6"></li>
 		      <li data-target="#myCarousel" data-slide-to="7"></li>
-		    </ol>
+		    </ol> -->
 		
 		    <!-- Wrapper for slides -->
-		    <div class="carousel-inner" onclick="afficher(1)">
-		      <div class="item thumbnail active">
+		    <div class="carousel-inner" id="carousel" onclick="afficher()">
+		      <!-- <div class="item thumbnail active">
 		        <img src="./img/salade_chevre_chaud.jpg" alt="Los Angeles" style="max-width:100%;">
 		      </div>
 		
@@ -94,7 +94,7 @@
 		    
 		      <div class="item thumbnail">
 		        <img src="./img/tarte_tatin.jpg" alt="New york" style="max-width:100%;">
-		      </div>
+		      </div> -->
 		    </div>
 		
 		    <!-- Left and right controls -->
@@ -111,8 +111,6 @@
 	  
 	<div class="col-md-4">
 		<div id="descriptif">
-			<h4>Titre</h4>
-			<p>Descriptif</p>
 		</div>
 	</div>
   </div>
