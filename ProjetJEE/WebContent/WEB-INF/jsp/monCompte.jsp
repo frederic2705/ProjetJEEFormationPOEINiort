@@ -3,6 +3,7 @@
     <%@ page import="projetjee.bo.User" %>
     <%@ page import="projetjee.bo.Commentaire" %>
     <%@ page import="java.util.List" %>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,14 +62,13 @@
 					<input type="password" id="mdp" value="password" name="mdp">
 					<input type="button" value="Modifier">
 				</div>
-				<% for(Commentaire commentaire : (List<Commentaire>)request.getAttribute("commentaire")){ %>
+				
 				<div class="col-md-12">
 					<label>Message :</label>
 					<figure>
-						<pre><% commentaire.getContenu(); %></pre>
+						<pre></pre>
 					</figure>
 				</div>
-				<%} %>
 				</form>
 			</div>
 		</div>

@@ -19,16 +19,16 @@ public class CommentaireDAOJdbcImpl implements CommentaireDAO
 	
 	private static final String DELETE = "DELETE FROM COMMENTAIRES WHERE id = ?;";
 	
-	private static final String SELECT_ALL_BY_USER = "SELECT COMMENTAIRES.id, commentaire, users_id, plats_id, note, date,"
-			+ "USERS.id, USERS.nom, prenom, mail, mdp, PLATS.id, PLATS.nom, ingredients, descriptif, prix, PLATS.img, restos_id"
-			+ "RESTOS.id, RESTOS.nom, adresse, RESTOS.img, ROLES.id, ROLES.nom"
-			+ "FROM COMMENTAIRES, USERS, PLATS, RESTOS, ROLES"
-			+ "WHERE roles_id = ROLES.id AND users_id = USERS.id AND COMMENTAIRES.plats_id = PLATS.id AND restos_id = RESTOS.id AND users_id = ?;";
+	private static final String SELECT_ALL_BY_USER = "SELECT COMMENTAIRES.id, commentaire, users_id, plats_id, note, date, "
+			+ "USERS.id, USERS.nom, prenom, mail, mdp, PLATS.id, PLATS.nom, ingredients, descriptif, prix, PLATS.img, restos_id, "
+			+ "RESTOS.id, RESTOS.nom, adresse, RESTOS.img, ROLES.id, ROLES.nom "
+			+ "FROM COMMENTAIRES, USERS, PLATS, RESTOS, ROLES "
+			+ "WHERE roles_id = ROLES.id AND users_id = USERS.id AND COMMENTAIRES.plats_id = PLATS.id AND restos_id = RESTOS.id AND users_id = 2;";
 	
-	private static final String SELECT_ALL_BY_PLAT = "SELECT COMMENTAIRES.id, commentaire, users_id, plats_id, note, date,"
-			+ "USERS.id, USERS.nom, prenom, mail, mdp, PLATS.id, PLATS.nom, ingredients, descriptif, prix, PLATS.img, restos_id"
-			+ "RESTOS.id, RESTOS.nom, adresse, RESTOS.img, ROLES.id, ROLES.nom"
-			+ "FROM COMMENTAIRES, USERS, PLATS, RESTOS, ROLES"
+	private static final String SELECT_ALL_BY_PLAT = "SELECT COMMENTAIRES.id, commentaire, users_id, plats_id, note, date, "
+			+ "USERS.id, USERS.nom, prenom, mail, mdp, PLATS.id, PLATS.nom, ingredients, descriptif, prix, PLATS.img, restos_id, "
+			+ "RESTOS.id, RESTOS.nom, adresse, RESTOS.img, ROLES.id, ROLES.nom "
+			+ "FROM COMMENTAIRES, USERS, PLATS, RESTOS, ROLES "
 			+ "WHERE roles_id = ROLES.id AND users_id = USERS.id AND COMMENTAIRES.plats_id = PLATS.id AND restos_id = RESTOS.id AND plats_id = ?;";
 	
 	public void insert(Commentaire commentaire) throws Exception 
@@ -118,7 +118,7 @@ public class CommentaireDAOJdbcImpl implements CommentaireDAO
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{			
 			pstmt = cnx.prepareStatement(SELECT_ALL_BY_USER);
-			pstmt.setInt(1, user.getId());
+			//pstmt.setInt(1, user.getId());
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next())

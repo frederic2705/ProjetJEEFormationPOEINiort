@@ -14,7 +14,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 	public static final String INSERT="INSERT INTO USERS (nom, prenom, mail, mdp, roles_id) VALUES (?,?,?,?,?);";
 	private static final String UPDATE = "UPDATE USERS set mail=? , mdp=? where id=?";
 
-	private static final String SELECT_BY_MDP_MAIL="SELECT mail, mdp FROM USERS WHERE mail = ? AND mdp = ?; ";
+	private static final String SELECT_BY_MDP_MAIL="SELECT id, mail, mdp FROM USERS WHERE mail = ? AND mdp = ?; ";
 	private static final String SELECT="SELECT nom, prenom, mail, mdp FROM USERS where id=?;"; 
 	
 	public void insert(User user) throws Exception {
@@ -55,14 +55,13 @@ public User select(int id)
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT, PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, user.getMail());
-			pstmt.setString(2, user.getMdp());
-			ResultSet rs = pstmt.executeQuery();
 			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
 		
 			while(rs.next()) {
 				
-				User tmp = new User(id,  rs.getString("nom"), rs.getString("prenom"), rs.getString("mail"), rs.getString("mdp"), "user");				
+				users = new User(id,  rs.getString("nom"), rs.getString("prenom"), rs.getString("mail"), rs.getString("mdp"), "user");				
 				}
 				
 			} catch (SQLException e) {
@@ -83,6 +82,7 @@ public User select(int id)
 			user = new User();
 			if(rs.next())
 			{
+				user.setId(rs.getInt("id"));
 				user.setMail(rs.getString("mail"));
 				user.setMdp(rs.getString("mdp"));
 			}

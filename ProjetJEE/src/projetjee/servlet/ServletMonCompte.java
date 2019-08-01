@@ -36,21 +36,16 @@ public class ServletMonCompte extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		int id = (int) session.getAttribute("user");
-		UserManager rm = new UserManager();
-		User user = null;
-		
-		try {
-			user = rm.getUser(id);
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		User user = (User) session.getAttribute("currentSessionUser");
+		int id = 0;
+		String userMdp = null;
+		String userMail = null;
+		if (user != null) {
+			id = user.getId();
+			userMdp = user.getMdp();
+			userMail = user.getMail();
 		}
-		
-		String userMdp = user.getMdp();
-		String userMail = user.getMail();
-		
+				
 		CommentaireManager am = new CommentaireManager();
 		List<Commentaire> commentaire = new ArrayList<Commentaire>();
 		try {
@@ -63,7 +58,7 @@ public class ServletMonCompte extends HttpServlet {
 		request.setAttribute("mdp", userMdp);
 		request.setAttribute("mail", userMail);
 		request.setAttribute("commentaire", commentaire);
-		RequestDispatcher rd = request.getRequestDispatcher("monCompte");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/monCompte.jsp");
 		rd.forward(request, response);
 	}
 
