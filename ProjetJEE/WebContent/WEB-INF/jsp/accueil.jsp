@@ -38,10 +38,10 @@
 	        <a class="nav-link" href="inscription">Inscription</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="monCompte">Mon Compte</a>
+	        <a class="nav-link" href="<%= request.getContextPath()%>/ServletMonCompte">Mon Compte</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="ajouterUnPlat">Ajouter un plat</a>
+	        <a class="nav-link" href="<%= request.getContextPath()%>/ServletConnexion">Ajouter un plat</a>
 	      </li>
 	    </ul>
 	  </div>

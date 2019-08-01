@@ -3,6 +3,7 @@
     <%@ page import="projetjee.bo.User" %>
     <%@ page import="projetjee.bo.Commentaire" %>
     <%@ page import="java.util.List" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,23 +53,24 @@
 			<form action="">
 				<div class="col-md-12">
 					<label>Mail :</label>
-					<p><% request.getAttribute("mail"); %>uneadresse@mail.fr</p>
+					<p><%= request.getAttribute("mail") %></p>
 					<input type="email" class="form-control" id="mail" />
 					<input type="button" value="Modifier">
 				</div>
 				<div class="col-md-12">
-					<label><% request.getAttribute("mdp");%>Mot de passe :</label>
-					<input type="password" id="mdp" value="password" name="mdp">
+					<label>Mot de passe :</label>
+					<input type="password" id="mdp" value="<%= request.getAttribute("mdp")%>" name="mdp">
 					<input type="button" value="Modifier">
 				</div>
-				<% for(Commentaire commentaire : (List<Commentaire>)request.getAttribute("commentaire")){ %>
+				
 				<div class="col-md-12">
-					<label>Message :</label>
-					<figure>
-						<pre><% commentaire.getContenu(); %></pre>
-					</figure>
+						<% for (Commentaire commentaire : (List<Commentaire>)(request.getAttribute("commentaire"))){ %>
+								<h3>Message</h3>
+								<ul>
+									<li><%= commentaire.getContenu()%></li>
+								</ul>
+						<% } %>
 				</div>
-				<%} %>
 				</form>
 			</div>
 		</div>

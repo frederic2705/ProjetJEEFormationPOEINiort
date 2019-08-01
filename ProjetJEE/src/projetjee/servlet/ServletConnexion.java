@@ -69,9 +69,10 @@ public class ServletConnexion extends HttpServlet {
 		user.setMail(mail);
 		user.setMdp(mdp);
 		String error = null;
+		User userConnexion = null;
 		try {
 			
-			User userConnexion = rm.selectConnection(user);
+			 userConnexion = rm.selectConnection(user);
 			
 			if((user.getMail().equals("")) && (user.getMdp().equals("")))
 			{
@@ -108,7 +109,9 @@ public class ServletConnexion extends HttpServlet {
 		else
 		{
 			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(10);
+			session.setMaxInactiveInterval(10*60);
+			session.setAttribute("currentSessionUser", userConnexion);
+			System.out.println(session);
 			RequestDispatcher rd = request.getRequestDispatcher("accueil");
 			rd.forward(request, response);
 		}
