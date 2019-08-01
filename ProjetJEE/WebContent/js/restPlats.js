@@ -136,21 +136,22 @@ function afficherInfo(response) {
 	infoDiv.innerHTML = "";
 	var responseJSON = JSON.parse(response);
 	console.log(responseJSON);
+	var h4 = document.createElement("h4");
+	h4.innerHTML = "Commentaires :";
+	infoDiv.appendChild(h4);
 	for(i=0; i<responseJSON.length; i++) {
-		infoDiv.appendChild(createInfo(responseJSON[i]));
+		createInfo(responseJSON[i]);
 	}
 }
 
 function createInfo(element) {
-	var h4 = document.createElement("h4");
-	h4.innerHTML = "Commentaires :";
+	
 	var div1 = document.createElement("div");
 	div1.id = "commentaire_"+element.id;	
 	var p = document.createElement("p");
 	
 	p.innerHTML = element.user.nom + element.contenu + " " + element.note;
 	
-	infoDiv.appendChild(h4);
 	infoDiv.appendChild(div1);
 	infoDiv.appendChild(p);
 }
