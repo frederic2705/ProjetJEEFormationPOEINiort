@@ -79,12 +79,12 @@
 </div>
 <!-- Fin carousel et descriptif -->
 
-<!-- Infos & Modifs commentaires Admin-->
+<!-- Infos & Editer-->
 <div class="container">
     <div class="row">
 		<div class="col-md-8">
-		<div id="infos">
-		</div>		
+			<div id="infos">
+			</div>		
 	</div>
   </div>
 </div>
@@ -95,6 +95,17 @@
     <div class="row">
 		<div class="col-md-8">
 		<div id="comUser">
+		</div>		
+	</div>
+  </div>
+</div>
+<!-- Fin evaluation User -->
+
+<!-- Modifs commentaires Admin -->
+<div class="container">
+    <div class="row">
+		<div class="col-md-8">
+		<div id="modifAdmin">
 		</div>		
 	</div>
   </div>

@@ -3,6 +3,7 @@ var descriptifDiv = document.getElementById("descriptif");
 var carouselDiv = document.getElementById("carousel");
 var infoDiv = document.getElementById("infos");
 var comUserDiv = document.getElementById("comUser");
+var modifAdmin = document.getElementById("modifAdmin");
 
 function createXHRForAffichageCarousel() {
 	    if (window.XMLHttpRequest) {
@@ -42,6 +43,24 @@ function createXHRForAffichageInfo() {
 	    return xhr;
 	}
 
+function createXHRForAffichageModif() {
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+    }
+    
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+            	afficherModif(xhr.responseText);
+            } else {
+                echec(xhr.status, xhr.responseText);
+            }
+        }
+    };
+    return xhr;
+}
 
 function createXHRForOthers() {
     if (window.XMLHttpRequest) {
@@ -150,10 +169,18 @@ function createInfo(element) {
 	div1.id = "commentaire_"+element.id;	
 	var p = document.createElement("p");
 	
-	p.innerHTML = element.user.nom + element.contenu + " " + element.note;
+	p.innerHTML = " - User : " + element.user.nom + ". Commentaire : " + element.contenu + " " + element.note;
+	
+	var button = document.createElement("input");
+	button.type = "button";
+	button.value = "Editer";
+	button.onclick=function() {
+		loadModif(element.id);
+	}
 	
 	infoDiv.appendChild(div1);
 	infoDiv.appendChild(p);
+	p.appendChild(button);
 }
 
 function afficherComUser(response) {
@@ -198,6 +225,45 @@ function createComUser(element) {
 	form.appendChild(document.createElement("br"));
 	form.appendChild(input3);
 	comUserDiv.appendChild(document.createElement("br"));
+}
+
+function loadModif(id) {
+	var xhr = createXHRForAffichageModif();
+	xhr.open("GET", "/ProjetJEE/rest/commentaires/" + id, true);
+	xhr.setRequestHeader("Accept","application/json");
+	xhr.send(null);
+}
+
+function afficherModif(response) {
+	infoDiv.innerHTML = "";
+	var responseJSON = JSON.parse(response);
+	console.log(responseJSON);
+	var h4 = document.createElement("h4");
+	h4.innerHTML = "Commentaires :";
+	infoDiv.appendChild(h4);
+	for(i=0; i<responseJSON.length; i++) {
+		createModif(responseJSON[i]);
+	}
+}
+
+function createModif(element) {
+	
+	var div1 = document.createElement("div");
+	div1.id = "commentaire_"+element.id;	
+	var p = document.createElement("p");
+	
+	p.innerHTML = " - user : " + element.user.nom + ". Commentaire : " + element.contenu + " ";
+	
+	var button = document.createElement("input");
+	button.type = "button";
+	button.value = "Editer";
+	button.onclick=function() {
+		loadModif(element.id);
+	}
+	
+	modifAdmin.appendChild(div1);
+	modifAdmin.appendChild(p);
+	p.appendChild(button);
 }
 
 function createNoteList(element) {
