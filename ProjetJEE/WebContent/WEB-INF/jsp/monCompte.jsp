@@ -1,9 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ page import="projetjee.bo.User" %>
+    <%@ page import="projetjee.bo.Commentaire" %>
+    <%@ page import="java.util.List" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><link rel="stylesheet" type="text/css" href="./css/style.css"/>
 <link rel="stylesheet" type="text/css" href="./css/style.css"/>
 <title>Mon compte</title>
@@ -49,20 +53,23 @@
 			<form action="">
 				<div class="col-md-12">
 					<label>Mail :</label>
-					<p>uneadresse@mail.fr</p>
+					<p><%= request.getAttribute("mail") %></p>
 					<input type="email" class="form-control" id="mail" />
 					<input type="button" value="Modifier">
 				</div>
 				<div class="col-md-12">
 					<label>Mot de passe :</label>
-					<input type="password" id="mdp" value="password" name="mdp">
+					<input type="password" id="mdp" value="<%= request.getAttribute("mdp")%>" name="mdp">
 					<input type="button" value="Modifier">
 				</div>
+				
 				<div class="col-md-12">
-					<label>Message :</label>
-					<figure>
-						<pre>Ceci est un test</pre>
-					</figure>
+						<% for (Commentaire commentaire : (List<Commentaire>)(request.getAttribute("commentaire"))){ %>
+								<h3>Message</h3>
+								<ul>
+									<li><%= commentaire.getContenu()%></li>
+								</ul>
+						<% } %>
 				</div>
 				</form>
 			</div>
