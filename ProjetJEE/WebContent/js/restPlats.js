@@ -12,7 +12,7 @@ function createXHRForAffichage() {
 	    xhr.onreadystatechange = function() {
 	        if (xhr.readyState == 4) {
 	            if (xhr.status == 200) {
-	            	console.log(xhr.responseText);
+	            	//console.log(xhr.responseText);
 	            	afficherDescriptif(xhr.responseText);
 	            	afficherCarousel(xhr.responseText);
 	            } else {
@@ -47,9 +47,8 @@ function afficherCarousel (response) {
 	carouselDiv.innerHTML = "";
 	var responseJSON = JSON.parse(response);
 	for(i=0; i<responseJSON.length; i++) {
-		carouselDiv.appendChild(createCarousel(responseJSON[i]));
+		createCarousel(responseJSON[i]);
 	}
-	alert("test2");
 }
 
 function afficher() {
@@ -63,21 +62,22 @@ function afficherDescriptif(response) {
 	descriptifDiv.innerHTML = "";
 	var responseJSON = JSON.parse(response);
 	for(i=0; i<responseJSON.length; i++) {
-		descriptifDiv.appendChild(createDescriptif(responseJSON[i]));
+		createDescriptif(responseJSON[i]);
 	}
 }
 
 function createCarousel(element) {
 	var div = document.createElement("div");
 	div.id = "image_"+element.id;
+	div.className="item thumbnail";
 	var img = document.createElement("img");
-	alert(element.image);
-	var image = element.image.replace("\\\\", "\\");
-	alert(image);
-	img.src = image;
+	img.src = element.image;
 	img.style = "max-width:100%;";
 	img.onclick=function() {afficher(element.id)};
 	
+	if(element.id==3) {
+		div.className="item thumbnail active";
+	}
 	carouselDiv.appendChild(div);
 	document.getElementById("image_"+element.id).appendChild(img);
 }

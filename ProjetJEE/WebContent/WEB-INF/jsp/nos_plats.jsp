@@ -67,7 +67,7 @@
 		    </ol> -->
 		
 		    <!-- Wrapper for slides -->
-		    <div class="carousel-inner" id="carousel" onclick="afficher()">
+		    <div class="carousel-inner" id="carousel" style="border-radius:30px;" onclick="afficher()">
 		      <!-- <div class="item thumbnail active">
 		        <img src="./img/salade_chevre_chaud.jpg" alt="Los Angeles" style="max-width:100%;">
 		      </div>
