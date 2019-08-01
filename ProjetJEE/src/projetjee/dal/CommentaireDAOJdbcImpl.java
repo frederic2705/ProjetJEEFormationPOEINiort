@@ -140,13 +140,13 @@ public class CommentaireDAOJdbcImpl implements CommentaireDAO
 		return retourListe;
 	}	
 	
-	public List<Commentaire> selectAllByPlat(Plat plat) throws Exception
+	public List<Commentaire> selectAllByPlat(int id) throws Exception
 	{
 		List<Commentaire> retourListe = new ArrayList<Commentaire>();
 		Commentaire retour = null;
 		PreparedStatement pstmt = null;
 		
-		if(plat == null)
+		if(id == null)
 		{
 			Exception exception = new Exception();
 			throw exception;
@@ -155,7 +155,7 @@ public class CommentaireDAOJdbcImpl implements CommentaireDAO
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{			
 			pstmt = cnx.prepareStatement(SELECT_ALL_BY_PLAT);
-			pstmt.setInt(1, plat.getId());
+			pstmt.setInt(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next())
