@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><link rel="stylesheet" type="text/css" href="./css/style.css"/>
 <link rel="stylesheet" type="text/css" href="./css/style.css"/>
 <title>Mon compte</title>
@@ -19,23 +20,23 @@
 	  <div class="collapse navbar-collapse" id="navbarText">
 	    <ul class="navbar-nav mr-auto">
 	    
+	      <li class="nav-item">
+	        <a class="nav-link" href="accueil">Accueil <span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="nos_plats">Nos plats</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="connexion">Connexion</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="inscription">Inscription</a>
+	      </li>
 	      <li class="nav-item active">
-	        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+	        <a class="nav-link" href="monCompte">Mon Compte</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Nos plats</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#">Connexion</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#">Inscription</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#">Mon Compte</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#">Ajouter un plat</a>
+	        <a class="nav-link" href="ajouterUnPlat">Ajouter un plat</a>
 	      </li>
 	    </ul>
 	  </div>

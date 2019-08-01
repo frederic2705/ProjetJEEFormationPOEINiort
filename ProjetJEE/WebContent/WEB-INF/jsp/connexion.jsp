@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,34 +24,34 @@
 	  <div class="collapse navbar-collapse" id="navbarText">
 	    <ul class="navbar-nav mr-auto">
 	    
+	      <li class="nav-item">
+	        <a class="nav-link" href="accueil">Accueil <span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="nos_plats">Nos plats</a>
+	      </li>
 	      <li class="nav-item active">
-	        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+	        <a class="nav-link" href="connexion">Connexion</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Nos plats</a>
+	        <a class="nav-link" href="inscription">Inscription</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Connexion</a>
+	        <a class="nav-link" href="monCompte">Mon Compte</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Inscription</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#">Mon Compte</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#">Ajouter un plat</a>
+	        <a class="nav-link" href="ajouterUnPlat">Ajouter un plat</a>
 	      </li>
 	    </ul>
 	  </div>
 	</nav>
-<!-- FIN Nav -->
-
+	<!-- FIN Nav -->
 <br>
+
 <form method="post" action="<%= request.getContextPath()%>/ServletConnexion">
 	<p>
 		<label for="email">email : </label>
-		<input type="text" id="email" name="email">
+		<input type="email" id="email" name="email">
 	</p>
 	<p>
 		<label for="mdp">Mot de passe : </label>
@@ -60,8 +61,18 @@
 	<input type="submit" value="Valider">
 </form>
 
-<br>
-<p>Erreur de saisie... Veuillez remplir les champs correctement</p>
+<%
+	List<String> erreurs = (List<String>)request.getAttribute("erreurs");
+	if(erreurs != null && erreurs.size() > 0) {
+		out.print("<pre>");
+		out.print("<ul>");
+		for (String err : erreurs) {
+			out.print("<li>"+err+"</li>");
+		}
+		out.print("</ul>");
+		out.print("</pre>");
+	}
+%>
 
 </body>
 </html>

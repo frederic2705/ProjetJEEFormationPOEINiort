@@ -26,28 +26,28 @@
 	  <div class="collapse navbar-collapse" id="navbarText">
 	    <ul class="navbar-nav mr-auto">
 	    
+	      <li class="nav-item">
+	        <a class="nav-link" href="accueil">Accueil <span class="sr-only">(current)</span></a>
+	      </li>
 	      <li class="nav-item active">
-	        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+	        <a class="nav-link" href="nos_plats">Nos plats</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Nos plats</a>
+	        <a class="nav-link" href="connexion">Connexion</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Connexion</a>
+	        <a class="nav-link" href="inscription">Inscription</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Inscription</a>
+	        <a class="nav-link" href="monCompte">Mon Compte</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Mon Compte</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#">Ajouter un plat</a>
+	        <a class="nav-link" href="ajouterUnPlat">Ajouter un plat</a>
 	      </li>
 	    </ul>
 	  </div>
 	</nav>
-<!-- FIN Nav -->
+	<!-- FIN Nav -->
 
 <!-- Carousel et descriptif -->
 <div class="container">

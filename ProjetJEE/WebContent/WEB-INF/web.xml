@@ -9,8 +9,8 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
- <servlet>
+
+  <servlet>
     <description>inscription JSP</description>
     <servlet-name>inscription</servlet-name>
     <jsp-file>/WEB-INF/jsp/inscription.jsp</jsp-file>
@@ -40,7 +40,9 @@
     <url-pattern>/ajouterUnPlat</url-pattern>
   </servlet-mapping>
   
+
   <servlet>
+    <description>accueilt JSP</description>
     <servlet-name>accueil</servlet-name>
     <jsp-file>/WEB-INF/jsp/accueil.jsp</jsp-file>
 	</servlet> 
