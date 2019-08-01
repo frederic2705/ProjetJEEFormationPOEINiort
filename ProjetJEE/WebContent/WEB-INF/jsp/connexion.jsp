@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +48,16 @@
 	<!-- FIN Nav -->
 <br>
 
-
+<%
+	List<String> erreurs = (List<String>)request.getAttribute("erreurs");
+	if(erreurs != null && erreurs.size() > 0) {
+		out.print("<ul>");
+		for (String err : erreurs) {
+			out.print("<li>"+err+"</li>");
+		}
+		out.print("</ul>");
+	}
+%>
 <form method="post" action="<%= request.getContextPath()%>/ServletConnexion">
 	<p>
 		<label for="email">email : </label>

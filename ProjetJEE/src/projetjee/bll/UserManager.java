@@ -27,12 +27,11 @@ public class UserManager {
 		return user;
 	}
 	
-	public List<User> getAll() throws Exception {
-		return dao.select();
+	public List<User> getAll(User user) throws Exception {
+		return dao.select(user);
 	}
 	
 	public User selectConnection(User user) throws Exception {
-		this.dao.selectByMdpAndMail(user);
-		return user;
+		return this.dao.selectByMdpAndMail(user);
 	}
 }

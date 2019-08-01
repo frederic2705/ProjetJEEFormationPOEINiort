@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import projetjee.bll.UserManager;
 import projetjee.bo.User;
@@ -42,36 +44,44 @@ public class ServletConnexion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		// Initialisation des erreurs possibles
 		List<String> erreurs = new ArrayList<String>();
 		
 		//Récupération du formulaire
 		String mail = request.getParameter("email");
 		String mdp = request.getParameter("mdp");
+		User user = new User(); 
 		
 		//test de récupération
 		System.out.println(mail);
 		System.out.println(mdp);
 		
-		if((mail == null) & (mdp == null))
+		if((mail.equals("")) && (mdp.equals("")))
 		{
 			erreurs.add("Veuillez, mettre un mail et un mot de passe.");
 		}
 		
 		//Recupération de la bdd
 		UserManager rm = new UserManager();
-		try 
-		{
-			List<User> user = rm.getAll();
-		}
+		user.setMail(mail);
+		user.setMdp(mdp);
+		
+		try {
+			
+			User userConnexion = rm.selectConnection(user);
+			if((user.getMail().equals("")) && (user.getMdp().equals("")))
+			{
+				erreurs.add("Aucune données correspondante.");
+			}
+		} 
 		catch (Exception e) 
 		{
-			
-			e.printStackTrace();
+			erreurs.add("Aucune données correspondante.");
 		}
+	
 		
-		request.setAttribute("mail", mail);
-		request.setAttribute("mdp", mdp);
 		
 		
 		if(erreurs.size()>0)
@@ -82,15 +92,13 @@ public class ServletConnexion extends HttpServlet {
 		}
 		else
 		{
-			
+			HttpSession session = request.getSession();
+			session.setMaxInactiveInterval(10);
 			RequestDispatcher rd = request.getRequestDispatcher("accueil");
 			rd.forward(request, response);
 		}
 		
-		
-		
-		
-		
+
 	}
 
 }
