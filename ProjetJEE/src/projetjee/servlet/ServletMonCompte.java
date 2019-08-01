@@ -54,7 +54,7 @@ public class ServletMonCompte extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		System.out.println(commentaire);
 		request.setAttribute("mdp", userMdp);
 		request.setAttribute("mail", userMail);
 		request.setAttribute("commentaire", commentaire);
