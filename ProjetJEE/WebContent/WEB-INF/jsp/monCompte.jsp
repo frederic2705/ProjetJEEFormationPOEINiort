@@ -1,10 +1,12 @@
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ page import="projetjee.bo.User" %>
+    <%@ page import="projetjee.bo.Commentaire" %>
+    <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><link rel="stylesheet" type="text/css" href="./css/style.css"/>
 <link rel="stylesheet" type="text/css" href="./css/style.css"/>
 <title>Mon compte</title>
@@ -20,23 +22,23 @@
 	  <div class="collapse navbar-collapse" id="navbarText">
 	    <ul class="navbar-nav mr-auto">
 	    
-	      <li class="nav-item">
-	        <a class="nav-link" href="accueil">Accueil <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="nos_plats">Nos plats</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="connexion">Connexion</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="inscription">Inscription</a>
-	      </li>
 	      <li class="nav-item active">
-	        <a class="nav-link" href="monCompte">Mon Compte</a>
+	        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="ajouterUnPlat">Ajouter un plat</a>
+	        <a class="nav-link" href="#">Nos plats</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Connexion</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Inscription</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Mon Compte</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Ajouter un plat</a>
 	      </li>
 	    </ul>
 	  </div>
@@ -50,21 +52,23 @@
 			<form action="">
 				<div class="col-md-12">
 					<label>Mail :</label>
-					<p>uneadresse@mail.fr</p>
+					<p><% request.getAttribute("mail"); %>uneadresse@mail.fr</p>
 					<input type="email" class="form-control" id="mail" />
 					<input type="button" value="Modifier">
 				</div>
 				<div class="col-md-12">
-					<label>Mot de passe :</label>
+					<label><% request.getAttribute("mdp");%>Mot de passe :</label>
 					<input type="password" id="mdp" value="password" name="mdp">
 					<input type="button" value="Modifier">
 				</div>
+				<% for(Commentaire commentaire : (List<Commentaire>)request.getAttribute("commentaire")){ %>
 				<div class="col-md-12">
 					<label>Message :</label>
 					<figure>
-						<pre>Ceci est un test</pre>
+						<pre><% commentaire.getContenu(); %></pre>
 					</figure>
 				</div>
+				<%} %>
 				</form>
 			</div>
 		</div>

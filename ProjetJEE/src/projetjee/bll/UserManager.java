@@ -27,8 +27,8 @@ public class UserManager {
 		return user;
 	}
 	
-	public List<User> getAll(User user) throws Exception {
-		return dao.select(user);
+	public User getUser(int id) throws Exception {
+		return dao.select(id);
 	}
 	
 	public User selectConnection(User user) throws Exception {
