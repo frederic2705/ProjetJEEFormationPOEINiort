@@ -120,7 +120,7 @@ public class CommentaireDAOJdbcImpl implements CommentaireDAO
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{			
 			pstmt = cnx.prepareStatement(SELECT_ALL_BY_USER);
-			//pstmt.setInt(1, user.getId());
+			pstmt.setInt(1, user.getId());
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next())

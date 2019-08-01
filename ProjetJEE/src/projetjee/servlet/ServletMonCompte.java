@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import projetjee.bll.CommentaireManager;
 import projetjee.bll.UserManager;
 import projetjee.bo.Commentaire;
@@ -67,7 +66,40 @@ public class ServletMonCompte extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		System.out.println("test");
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute("currentSessionUser");
+			UserManager rm = new UserManager();
+			String mdp = request.getParameter("mdp");
+			String mail = request.getParameter("mail");
+			if(mail == null)
+			{
+				mail = user.getMail();
+				user.setMail(mail);
+				user.setMdp(mdp);
+				try {
+					rm.update(user);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			if(mdp == null)
+			{
+				mdp = user.getMdp();
+				user.setMdp(mdp);
+				user.setMail(mail);
+				try {
+					rm.update(user);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil.jsp");
+			rd.forward(request, response);
 	}
 
 }
