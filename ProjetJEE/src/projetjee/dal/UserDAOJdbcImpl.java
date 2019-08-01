@@ -11,8 +11,10 @@ import projetjee.bo.Plat;
 import projetjee.bo.User;
 
 public class UserDAOJdbcImpl implements UserDAO {
-	public static final String INSERT="INSERT INTO USERS (nom, prenom, mail, mdp) VALUES (?,?,?,?);";
+	public static final String INSERT="INSERT INTO USERS (nom, prenom, mail, mdp, roles_id) VALUES (?,?,?,?,?);";
 	private static final String UPDATE = "UPDATE USERS set mail=? , mdp=? where id=?";
+
+	private static final String SELECT_BY_MDP_MAIL="SELECT mail, mdp FROM USERS WHERE mail = ? AND mdp = ?; ";
 	private static final String SELECT="SELECT nom, prenom, mail, mdp FROM USERS where id=?;"; 
 	
 	public void insert(User user) throws Exception {
@@ -23,6 +25,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 			pstmt.setString(2, user.getPrenom());
 			pstmt.setString(3, user.getMail());
 			pstmt.setString(4, user.getMdp());
+			pstmt.setInt(5, 1);
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if(rs.next())
@@ -46,12 +49,14 @@ public class UserDAOJdbcImpl implements UserDAO {
 		}
 	}
 	
-	public User select(int id)
+public User select(int id)
 	{
 		User users = null;
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT, PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, user.getMail());
+			pstmt.setString(2, user.getMdp());
 			ResultSet rs = pstmt.executeQuery();
 			pstmt.setInt(1, id);
 		
@@ -65,6 +70,31 @@ public class UserDAOJdbcImpl implements UserDAO {
 				e.printStackTrace();
 			}
 		return users;
-
 	}
+	
+	public User selectByMdpAndMail(User user)
+	{
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_MDP_MAIL, PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, user.getMail());
+			pstmt.setString(2, user.getMdp());
+			ResultSet rs = pstmt.executeQuery();
+			user = new User();
+			if(rs.next())
+			{
+				user.setMail(rs.getString("mail"));
+				user.setMdp(rs.getString("mdp"));
+			}
+			
+			
+	}catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		return user;
+	}
+	
+	
 }
+
