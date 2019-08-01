@@ -83,11 +83,11 @@ public class UserDAOJdbcImpl implements UserDAO {
 			pstmt.setString(1, user.getMail());
 			pstmt.setString(2, user.getMdp());
 			ResultSet rs = pstmt.executeQuery();
-			User retourUser = new User();
+			user = new User();
 			if(rs.next())
 			{
-				retourUser.setMail(rs.getString("mail"));
-				retourUser.setMdp(rs.getString("mdp"));
+				user.setMail(rs.getString("mail"));
+				user.setMdp(rs.getString("mdp"));
 			}
 			
 			

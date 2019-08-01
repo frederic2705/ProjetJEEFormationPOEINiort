@@ -22,7 +22,7 @@ import projetjee.bo.User;
 @WebServlet("/ServletConnexion")
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private int compteur = 0; 
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -58,22 +58,37 @@ public class ServletConnexion extends HttpServlet {
 		System.out.println(mail);
 		System.out.println(mdp);
 		
-		if((mail.equals("")) && (mdp.equals("")))
+		/*if((mail.equals("")) && (mdp.equals("")))
 		{
-			erreurs.add("Veuillez, mettre un mail et un mot de passe.");
-		}
+			erreurs.add("Veuillez, saisir un mail et un mot de passe.");
+			compteur++;
+		}*/
 		
 		//Recupération de la bdd
 		UserManager rm = new UserManager();
 		user.setMail(mail);
 		user.setMdp(mdp);
-		
+		String error = null;
 		try {
 			
 			User userConnexion = rm.selectConnection(user);
+			
 			if((user.getMail().equals("")) && (user.getMdp().equals("")))
 			{
 				erreurs.add("Aucune données correspondante.");
+				compteur++;
+			}
+			
+			if(!user.getMail().equals(userConnexion.getMail()))
+			{
+				erreurs.add("Mail non valide");
+				compteur++;
+			}
+			
+			if(!user.getMdp().equals(userConnexion.getMdp()))
+			{
+				erreurs.add("Mot de passe non valide");
+				compteur++;
 			}
 		} 
 		catch (Exception e) 

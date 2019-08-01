@@ -48,20 +48,10 @@
 	<!-- FIN Nav -->
 <br>
 
-<%
-	List<String> erreurs = (List<String>)request.getAttribute("erreurs");
-	if(erreurs != null && erreurs.size() > 0) {
-		out.print("<ul>");
-		for (String err : erreurs) {
-			out.print("<li>"+err+"</li>");
-		}
-		out.print("</ul>");
-	}
-%>
 <form method="post" action="<%= request.getContextPath()%>/ServletConnexion">
 	<p>
 		<label for="email">email : </label>
-		<input type="text" id="email" name="email">
+		<input type="email" id="email" name="email">
 	</p>
 	<p>
 		<label for="mdp">Mot de passe : </label>
@@ -71,8 +61,18 @@
 	<input type="submit" value="Valider">
 </form>
 
-<br>
-<p>Erreur de saisie... Veuillez remplir les champs correctement</p>
+<%
+	List<String> erreurs = (List<String>)request.getAttribute("erreurs");
+	if(erreurs != null && erreurs.size() > 0) {
+		out.print("<pre>");
+		out.print("<ul>");
+		for (String err : erreurs) {
+			out.print("<li>"+err+"</li>");
+		}
+		out.print("</ul>");
+		out.print("</pre>");
+	}
+%>
 
 </body>
 </html>
