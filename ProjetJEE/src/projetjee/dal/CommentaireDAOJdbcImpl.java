@@ -120,7 +120,7 @@ public class CommentaireDAOJdbcImpl implements CommentaireDAO
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{			
 			pstmt = cnx.prepareStatement(SELECT_ALL_BY_USER);
-			//pstmt.setInt(1, user.getId());
+			pstmt.setInt(1, user.getId());
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next())
@@ -148,12 +148,6 @@ public class CommentaireDAOJdbcImpl implements CommentaireDAO
 		Commentaire retour = null;
 		PreparedStatement pstmt = null;
 		
-		if(id == null)
-		{
-			Exception exception = new Exception();
-			throw exception;
-		}
-		
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{			
 			pstmt = cnx.prepareStatement(SELECT_ALL_BY_PLAT);
@@ -164,9 +158,9 @@ public class CommentaireDAOJdbcImpl implements CommentaireDAO
 			{			
 				User user = new User(rs.getInt("idUser"), rs.getString("nomUser"), rs.getString("prenom"), rs.getString("mail"), rs.getString("mdp"), rs.getString("nomRole"));
 				Restaurant resto = new Restaurant(rs.getInt("idResto"), rs.getString("nomResto"), rs.getString("adresse"), rs.getString("imgResto"));
-				//Plat plat = new Plat(rs.getInt("PLATS.id"), rs.getString("PLATS.nom"), rs.getString("ingredients"), rs.getString("descriptif"), rs.getFloat("prix"), rs.getString("img"), rs.getInt("quantite"), resto);
+				Plat plat = new Plat(rs.getInt("idPlat"), rs.getString("nomPlat"), rs.getString("ingredients"), rs.getString("descriptif"), rs.getFloat("prix"), rs.getString("imgPlat"), resto);
 				retour = new Commentaire(rs.getInt("idCommentaire"), rs.getString("commentaire"), rs.getInt("note"), rs.getDate("date"), plat, user);
-				
+
 				retourListe.add(retour);
 			}
 		}

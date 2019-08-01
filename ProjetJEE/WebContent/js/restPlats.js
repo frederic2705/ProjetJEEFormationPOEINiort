@@ -92,7 +92,7 @@ function createCarousel(element) {
 	
 	img.onclick=function() {
 		afficherDescriptif(element);
-		loadInfo(element);
+		loadInfo(element.id);
 		afficherComUser(element)
 	};
 	
@@ -125,33 +125,34 @@ function createDescriptif(element) {
 	descriptifDiv.appendChild(div2);
 }
 
-function loadInfo () {
+function loadInfo(id) {
 	var xhr = createXHRForAffichageInfo();
-	xhr.open("GET", "/ProjetJEE/rest/commentaires", true);
+	xhr.open("GET", "/ProjetJEE/rest/commentaires/" + id, true);
 	xhr.setRequestHeader("Accept","application/json");
 	xhr.send(null);
 }
 
 function afficherInfo(response) {
 	infoDiv.innerHTML = "";
-	createInfo(response);
+	var responseJSON = JSON.parse(response);
+	console.log(responseJSON);
+	for(i=0; i<responseJSON.length; i++) {
+		infoDiv.appendChild(createInfo(responseJSON[i]));
+	}
 }
 
 function createInfo(element) {
-	var div1 = document.createElement("div");
-	div1.id = "descritpitf";
-	var div2 = document.createElement("div");
-	div2.id = "ingredients";	
 	var h4 = document.createElement("h4");
-	h4.innerHTML = element.nom;
-
-	div1.innerHTML = element.descriptif;
-	div2.innerHTML = element.ingredients;
+	h4.innerHTML = "Commentaires :";
+	var div1 = document.createElement("div");
+	div1.id = "commentaire_"+element.id;	
+	var p = document.createElement("p");
+	
+	p.innerHTML = element.user.nom + element.contenu + " " + element.note;
 	
 	infoDiv.appendChild(h4);
 	infoDiv.appendChild(div1);
-	infoDiv.appendChild(document.createElement("br"));
-	infoDiv.appendChild(div2);
+	infoDiv.appendChild(p);
 }
 
 function afficherComUser(response) {
@@ -168,7 +169,7 @@ function createComUser(element) {
 	form.action = "<%= request.getContextPath() %>/ServletNosPlats";
 	var label1 = document.createElement("label");
 	label1.for = "noteUser";
-	label1.innerHTML = "Votre note :";
+	label1.innerHTML = "Votre note : ";
 	var input1 = document.createElement("input");
 	input1.type = "number";
 	input1.id = "noteUser";
@@ -176,7 +177,7 @@ function createComUser(element) {
 	
 	var label2 = document.createElement("label");
 	label2.for = "comUser";
-	label2.innerHTML = "Votre commentaire :";
+	label2.innerHTML = "Votre commentaire : ";
 	var input2 = document.createElement("input");
 	input2.type = "text";
 	input2.id = "comUser";
