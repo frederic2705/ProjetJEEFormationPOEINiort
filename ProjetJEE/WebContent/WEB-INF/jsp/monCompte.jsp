@@ -50,17 +50,17 @@
 	<div class="row">
 		<div class="col-md-12 ">
 			<div class="row absolute">
-			<form action="">
+			<form method="POST" action="/ProjetJEE/ServletMonCompte">
 				<div class="col-md-12">
 					<label>Mail :</label>
 					<p><%= request.getAttribute("mail") %></p>
 					<input type="email" class="form-control" id="mail" />
-					<input type="button" value="Modifier">
+					<input type="submit" value="Modifier">
 				</div>
 				<div class="col-md-12">
 					<label>Mot de passe :</label>
 					<input type="password" id="mdp" value="<%= request.getAttribute("mdp")%>" name="mdp">
-					<input type="button" value="Modifier">
+					<input type="submit" value="Modifier">
 				</div>
 				
 				<div class="col-md-12">
