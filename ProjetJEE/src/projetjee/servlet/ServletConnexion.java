@@ -23,6 +23,7 @@ import projetjee.bo.User;
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private int compteur = 0; 
+   
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,6 +37,10 @@ public class ServletConnexion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		session.invalidate ();
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp");
 		rd.forward(request, response);
 	}
@@ -68,36 +73,43 @@ public class ServletConnexion extends HttpServlet {
 		UserManager rm = new UserManager();
 		user.setMail(mail);
 		user.setMdp(mdp);
-		String error = null;
+		User userConnexion = null; 
 		try {
 			
-			User userConnexion = rm.selectConnection(user);
+			userConnexion = rm.selectConnection(user);
 			
 			if((user.getMail().equals("")) && (user.getMdp().equals("")))
 			{
-				erreurs.add("Aucune données correspondante.");
+				erreurs.add("Veuillez, saisir un mail et un mot de passe.");
 				compteur++;
 			}
-			
-			if(!user.getMail().equals(userConnexion.getMail()))
+			else
 			{
-				erreurs.add("Mail non valide");
-				compteur++;
-			}
-			
-			if(!user.getMdp().equals(userConnexion.getMdp()))
-			{
-				erreurs.add("Mot de passe non valide");
-				compteur++;
+				if(!user.getMail().equals(userConnexion.getMail()))
+				{
+					erreurs.add("Mail non valide");
+					compteur++;
+				}
+				
+				if(!user.getMdp().equals(userConnexion.getMdp()))
+				{
+					erreurs.add("Mot de passe non valide");
+					compteur++;
+				}
 			}
 		} 
 		catch (Exception e) 
 		{
-			erreurs.add("Aucune données correspondante.");
+			e.printStackTrace();
 		}
 	
-		
-		
+		//gestion des 3 tentatives de connexion
+		if(compteur > 3)
+		{
+			RequestDispatcher rd = request.getRequestDispatcher("inscription");
+			rd.forward(request, response);
+		}
+		//
 		
 		if(erreurs.size()>0)
 		{
@@ -107,8 +119,13 @@ public class ServletConnexion extends HttpServlet {
 		}
 		else
 		{
+			//création session
 			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(10);
+			session.setMaxInactiveInterval(10*60);
+			session.setAttribute("currentSessionUser", userConnexion);
+			System.out.println(session.getAttribute("currentSessionUser"));
+			
+			
 			RequestDispatcher rd = request.getRequestDispatcher("accueil");
 			rd.forward(request, response);
 		}

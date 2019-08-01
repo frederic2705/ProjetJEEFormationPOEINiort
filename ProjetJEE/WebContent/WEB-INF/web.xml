@@ -64,4 +64,8 @@
     <servlet-name>connexion</servlet-name>
     <url-pattern>/connexion</url-pattern>
   </servlet-mapping>
+  
+  <session-config>
+  	<session-timeout>600</session-timeout>
+  </session-config>
 </web-app>

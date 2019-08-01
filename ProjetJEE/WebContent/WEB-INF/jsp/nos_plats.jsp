@@ -32,12 +32,31 @@
 	      <li class="nav-item active">
 	        <a class="nav-link" href="nos_plats">Nos plats</a>
 	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="connexion">Connexion</a>
+	       <li class="nav-item">
+	        <a class="nav-link" href="/ProjetJEE/ServletConnexion">
+	        <%
+				if(session.getAttribute("currentSessionUser") != null)
+				{
+					out.print("Deconnexion");	
+				}
+				else
+				{
+					out.print("Connexion");	
+				}
+			%>
+			 </a>
 	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="inscription">Inscription</a>
-	      </li>
+	       <% 
+	      	if(session.getAttribute("currentSessionUser") == null)
+	     	 {
+				out.print("<li class=\"nav-item\">");
+				out.print("<a class=\"nav-link\" href=\"inscription\">");
+				out.print("Inscription");
+				out.print("</a>");
+				out.print("</li>");
+			}
+			
+	      %>
 	      <li class="nav-item">
 	        <a class="nav-link" href="monCompte">Mon Compte</a>
 	      </li>

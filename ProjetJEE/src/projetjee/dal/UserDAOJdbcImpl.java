@@ -14,7 +14,8 @@ public class UserDAOJdbcImpl implements UserDAO {
 	public static final String INSERT="INSERT INTO USERS (nom, prenom, mail, mdp, roles_id) VALUES (?,?,?,?,?);";
 	private static final String UPDATE = "UPDATE USERS set mail=? , mdp=? where id=?";
 	private static final String SELECT="SELECT (mail, mdp) FROM USERS;";
-	private static final String SELECT_BY_MDP_MAIL="SELECT mail, mdp FROM USERS WHERE mail = ? AND mdp = ?; ";
+	private static final String SELECT_BY_MDP_MAIL="SELECT ROLES.nom as nomRole, mail, mdp FROM USERS,ROLES WHERE roles_id=ROLES.id AND mail = ? AND mdp = ?; ";
+	
 	
 	
 	public void insert(User user) throws Exception {
@@ -80,12 +81,14 @@ public class UserDAOJdbcImpl implements UserDAO {
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_MDP_MAIL, PreparedStatement.RETURN_GENERATED_KEYS);
+			
 			pstmt.setString(1, user.getMail());
 			pstmt.setString(2, user.getMdp());
 			ResultSet rs = pstmt.executeQuery();
 			user = new User();
 			if(rs.next())
 			{
+				user.setRole(rs.getString("nomRole"));
 				user.setMail(rs.getString("mail"));
 				user.setMdp(rs.getString("mdp"));
 			}
