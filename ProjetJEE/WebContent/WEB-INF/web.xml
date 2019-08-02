@@ -36,11 +36,13 @@
     <servlet-name>ajouterUnPlat</servlet-name>
     <url-pattern>/ajouterUnPlat</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <description>accueilt JSP</description>
+
     <servlet-name>accueil</servlet-name>
     <jsp-file>/WEB-INF/jsp/accueil.jsp</jsp-file>
-  </servlet>
+	</servlet> 
   <servlet-mapping>
     <servlet-name>accueil</servlet-name>
     <url-pattern>/accueil</url-pattern>
@@ -60,5 +62,18 @@
   <servlet-mapping>
     <servlet-name>connexion</servlet-name>
     <url-pattern>/connexion</url-pattern>
+  </servlet-mapping>
+  
+  <session-config>
+  	<session-timeout>600</session-timeout>
+  </session-config>
+  
+  <servlet>
+    <servlet-name>navbar</servlet-name>
+    <jsp-file>/WEB-INF/jsp/navbar.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>navbar</servlet-name>
+    <url-pattern>/navbar</url-pattern>
   </servlet-mapping>
 </web-app>
