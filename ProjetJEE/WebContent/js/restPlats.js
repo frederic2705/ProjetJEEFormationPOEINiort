@@ -4,6 +4,7 @@ var carouselDiv = document.getElementById("carousel");
 var infoDiv = document.getElementById("infos");
 var comUserDiv = document.getElementById("comUser");
 var modifAdminDiv = document.getElementById("modifAdmin");
+var currentId;
 
 function createXHRForAffichageCarousel() {
 	    if (window.XMLHttpRequest) {
@@ -72,7 +73,7 @@ function createXHRForOthers() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
-            	afficher();
+            	loadInfo(currentId);
             	
             } else {
                 echec(xhr.status, xhr.responseText);
@@ -145,6 +146,7 @@ function createDescriptif(element) {
 }
 
 function loadInfo(id) {
+	currentId = id;
 	var xhr = createXHRForAffichageInfo();
 	xhr.open("GET", "/ProjetJEE/rest/commentaires/" + id, true);
 	xhr.setRequestHeader("Accept","application/json");
@@ -170,7 +172,7 @@ function createInfo(element) {
 	div1.style = "display: flex; justify-content: space-between;"
 	var p = document.createElement("p");
 	
-	p.innerHTML = "- User : " + element.user.nom + ". Commentaire : " + element.contenu + " " + element.note + "&nbsp;";
+	p.innerHTML = "- User : " + element.user.nom + ". Commentaire : " + element.contenu + ". Note : " + element.note + "&nbsp;";
 	
 	var button = document.createElement("input");
 	button.id = "button_"+element.id;
@@ -178,7 +180,7 @@ function createInfo(element) {
 	button.value = "Editer";
 	button.style = "margin-right:20px;";
 	button.onclick=function() {
-		loadModif(element.id);
+		afficherModif(element);
 	}
 	
 	infoDiv.appendChild(div1);
@@ -209,40 +211,38 @@ function createComUser(element) {
 	var label2 = document.createElement("label");
 	label2.for = "comUser";
 	label2.innerHTML = "Votre commentaire : ";
-	var input2 = document.createElement("input");
-	input2.type = "text";
-	input2.id = "comUser";
-	input2.name = "comUser";
+	var textArea = document.createElement("textarea");
+	textArea.id = "text_"+element.id;
+	textArea.name = "comUser";
+	textArea.rows = "5";
+	textArea.cols = "33";
+//	textarea.value="";
+//	textarea.placeholder="Créez une nouvelle note...";
+	textArea.innerHTML = "Commentaire : " + element.contenu;
 
 	var input3 = document.createElement("input");
 	input3.type = "submit";
 	input3.value = "Valider";
+	input3.onclick = function() {
+		ajouterCom(element);
+	}
 	
 	comUserDiv.appendChild(h4);
 	comUserDiv.appendChild(form);
 	form.appendChild(label1);
+	form.appendChild(document.createElement("br"));
 	form.appendChild(input1);
 	form.appendChild(document.createElement("br"));
 	form.appendChild(label2);
-	form.appendChild(input2);
+	form.appendChild(document.createElement("br"));
+	form.appendChild(textArea);
 	form.appendChild(document.createElement("br"));
 	form.appendChild(input3);
 	comUserDiv.appendChild(document.createElement("br"));
 }
 
-function loadModif(id) {
-	var xhr = createXHRForAffichageModif();
-	xhr.open("GET", "/ProjetJEE/rest/commentaires/" + id, true);
-	xhr.setRequestHeader("Accept","application/json");
-	xhr.send(null);
-}
-
 function afficherModif(response) {
 	modifAdminDiv.innerHTML = "";
-//	var responseJSON = JSON.parse(response);
-//	for(i=0; i<responseJSON.length; i++) {
-//		createModif(responseJSON[i]);
-//	}
 	createModif(response);
 }
 
@@ -260,14 +260,14 @@ function createModif(element) {
 	button1.type = "button";
 	button1.value = "Modifier";
 	button1.onclick=function() {
-		loadModif(element.id);
+		modifierCom(element.id);
 	}
 	
 	var button2 = document.createElement("input");
 	button2.type = "button";
 	button2.value = "Supprimer";
 	button2.onclick=function() {
-		loadModif(element.id);
+		supprimerCom(element.id);
 	}
 	
 	modifAdminDiv.appendChild(div1);
@@ -277,36 +277,13 @@ function createModif(element) {
 	modifAdminDiv.appendChild(button2);
 }
 
-function createNoteList(element) {
-	var div = document.createElement("div");
-	var textarea = document.createElement("textarea");
-	textarea.value = element.value;
-	textarea.id = "ta" + element.id;
-	div.appendChild(textarea);
-	
-	var modifier = document.createElement("input");
-	modifier.type="button";
-	modifier.value="Modifier";
-	modifier.onclick=function() {modifierNote(element.id)};
-	
-	var supprimer = document.createElement("input");
-	supprimer.type="button";
-	supprimer.value="Supprimer";
-	supprimer.onclick=function() {supprimerNote(element.id)};
-	
-	div.appendChild(modifier);
-	div.appendChild(supprimer);
-	
-	return div;
-}
-
-function ajouter() {
+function ajouterCom() {
 	var xhr = createXHRForOthers();
 	
 	var textarea = document.getElementById("taCreation");
 	var formulaire = "value=" + encodeURIComponent(textarea.value);
 	
-	xhr.open("POST", "/myTPPriseDeNote/rest/notes", true);
+	xhr.open("POST", "/ProjetJEE/rest/commentaires", true);
 	xhr.setRequestHeader("Accept","application/json");
     xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr.send(formulaire);
@@ -314,20 +291,20 @@ function ajouter() {
 	textarea.placeholder="Créez une nouvelle note...";
 }
 
-function modifierNote(id) {
+function modifierCom(id) {
 	var xhr = createXHRForOthers();
-	
-	var textarea = document.getElementById("ta" + id);
+	var textarea = document.getElementById("text_" + id);
 	var formulaire = "value=" + encodeURIComponent(textarea.value);
 	
-	xhr.open("PUT", "/myTPPriseDeNote/rest/notes/" + id, true);
+	xhr.open("PUT", "/ProjetJEE/rest/commentaires/" + id, true);
 	xhr.setRequestHeader("Accept","application/json");
     xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr.send(formulaire);
 }
 
-function supprimerNote(id) {
+function supprimerCom(id) {
 	var xhr = createXHRForOthers();
-	xhr.open("DELETE", "/myTPPriseDeNote/rest/notes/" + id, true);
+	xhr.open("DELETE", "/ProjetJEE/rest/commentaires/" + id, true);
+	modifAdminDiv.remove();
 	xhr.send(null);
 }
