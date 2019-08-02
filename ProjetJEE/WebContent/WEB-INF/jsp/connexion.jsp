@@ -41,12 +41,6 @@
 	      <li class="nav-item">
 	        <a class="nav-link" href="inscription">Inscription</a>
 	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="monCompte">Mon Compte</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="ajouterUnPlat">Ajouter un plat</a>
-	      </li>
 	    </ul>
 	  </div>
 	</nav>

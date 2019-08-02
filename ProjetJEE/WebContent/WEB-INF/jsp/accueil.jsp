@@ -39,8 +39,7 @@
 	      <li class="nav-item">
 	        <a class="nav-link" href="/ProjetJEE/ServletConnexion">
 	        <%
-	        
-	       
+
 				if(session.getAttribute("currentSessionUser") != null)
 				{
 					out.print("Deconnexion");	
@@ -49,8 +48,7 @@
 				{
 					out.print("Connexion");	
 				}
-	        
-	       
+
 			%>
 			 </a>
 	      </li>
@@ -79,6 +77,8 @@
 	      %>
 	      
 	      <% 
+	      if(session.getAttribute("currentSessionUser") != null)
+	      {
 	      	if(role.getRole().equals("admin"))
 	     	 {
 				out.print("<li class=\"nav-item\">");
@@ -87,7 +87,7 @@
 				out.print("</a>");
 				out.print("</li>");
 			}
-	      	
+	      }
 			
 	      %>
 	    </ul>

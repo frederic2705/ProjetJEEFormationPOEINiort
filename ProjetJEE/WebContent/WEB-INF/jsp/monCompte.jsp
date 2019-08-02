@@ -61,7 +61,7 @@
 	      </li>
 	      
 	      <% 
-	      	if(role.getRole().equals("admin"))
+	     	 if(role.getRole().equals("admin"))
 	     	 {
 				out.print("<li class=\"nav-item\">");
 				out.print("<a class=\"nav-link\" href=\"ajouterUnPlat\">");
@@ -69,7 +69,6 @@
 				out.print("</a>");
 				out.print("</li>");
 			}
-			
 	      %>
  
 	    </ul>

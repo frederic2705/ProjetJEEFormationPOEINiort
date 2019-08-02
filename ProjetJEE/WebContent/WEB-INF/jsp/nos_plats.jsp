@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+  <%@ page import="projetjee.bo.User" %>  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
@@ -25,7 +25,7 @@
 	  </button>
 	  <div class="collapse navbar-collapse" id="navbarText">
 	    <ul class="navbar-nav mr-auto">
-	    
+	    <% User role = (User) session.getAttribute("currentSessionUser"); %>
 	      <li class="nav-item">
 	        <a class="nav-link" href="accueil">Accueil <span class="sr-only">(current)</span></a>
 	      </li>
@@ -57,12 +57,33 @@
 			}
 			
 	      %>
-	      <li class="nav-item">
-	        <a class="nav-link" href="monCompte">Mon Compte</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="ajouterUnPlat">Ajouter un plat</a>
-	      </li>
+	      
+	      <% 
+	      	if(session.getAttribute("currentSessionUser") != null)
+	     	 {
+				out.print("<li class=\"nav-item\">");
+				out.print("<a class=\"nav-link\" href=\"monCompte\">");
+				out.print("Mon compte");
+				out.print("</a>");
+				out.print("</li>");
+			}
+			
+	      %>
+	      
+	      <% 
+	      if(session.getAttribute("currentSessionUser") != null)
+	      {
+	      	if(role.getRole().equals("admin"))
+	     	 {
+				out.print("<li class=\"nav-item\">");
+				out.print("<a class=\"nav-link\" href=\"ajouterUnPlat\">");
+				out.print("Ajouter un plat");
+				out.print("</a>");
+				out.print("</li>");
+			}
+	      }
+			
+	      %>
 	    </ul>
 	  </div>
 	</nav>
