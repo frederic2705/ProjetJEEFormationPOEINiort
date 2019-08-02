@@ -76,7 +76,7 @@ public class ServletInscription extends HttpServlet {
 		// Initialisation des erreurs possibles
 				List<String> erreurs = new ArrayList<String>();
 		try {
-			userConnexion = us.selectConnection(user);
+			userConnexion = us.selectRole(user);
 			
 			if(!user.getMail().equals(userConnexion.getMail()))
 			{
