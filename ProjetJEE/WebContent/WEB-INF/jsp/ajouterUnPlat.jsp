@@ -14,57 +14,8 @@
 <title>Ajouter un plat</title>
 </head>
 <body>
-	<!-- Nav -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" 
-	  aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="collapse navbar-collapse" id="navbarText">
-	    <ul class="navbar-nav mr-auto">
-	    
-	      <li class="nav-item">
-	        <a class="nav-link" href="accueil">Accueil <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="nos_plats">Nos plats</a>
-	      </li>
-	       <li class="nav-item">
-	        <a class="nav-link" href="/ProjetJEE/ServletConnexion">
-	        <%
-				if(session.getAttribute("currentSessionUser") != null)
-				{
-					out.print("Deconnexion");	
-				}
-				else
-				{
-					out.print("Connexion");	
-				}
-			%>
-			 </a>
-	      </li>
-	      <% 
-	      	if(session.getAttribute("currentSessionUser") == null)
-	     	 {
-				out.print("<li class=\"nav-item\">");
-				out.print("<a class=\"nav-link\" href=\"inscription\">");
-				out.print("Inscription");
-				out.print("</a>");
-				out.print("</li>");
-			}
-			
-	      %>
-	      <li class="nav-item">
-	        <a class="nav-link" href="monCompte">Mon Compte</a>
-	      </li>
-	      <li class="nav-item active">
-	        <a class="nav-link" href="ajouterUnPlat">Ajouter un plat</a>
-	      </li>
-	    </ul>
-	  </div>
-	</nav>
-	<!-- FIN Nav -->
+<%@ include file="navbar.jsp" %>
+	
 	<div class="container-fluid">
 	<div class="row absolute background coin-arrondi" style="margin-left: auto; margin-right: auto">
 		<div class="col-md-12">

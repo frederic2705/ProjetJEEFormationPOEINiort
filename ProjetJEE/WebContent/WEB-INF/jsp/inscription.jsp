@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,35 +15,10 @@
 <title>Inscription</title>
 </head>
 <body>
-		<!-- Nav -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" 
-	  aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="collapse navbar-collapse" id="navbarText">
-	    <ul class="navbar-nav mr-auto">
-	    
-	      <li class="nav-item ">
-	        <a class="nav-link" href="accueil">Accueil <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="nos_plats">Nos plats</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="connexion">Connexion</a>
-	      </li>
-	      <li class="nav-item active">
-	        <a class="nav-link" href="inscription">Inscription</a>
-	      </li>
-	    </ul>
-	  </div>
-	</nav>
-	<!-- FIN Nav -->
+<%@ include file="navbar.jsp" %>
 	<div class="container-fluid">
 		<div class="row absolute background coin-arrondi" style="margin-left: auto; margin-right: auto">
-			<div class="col-md-12 ">
+			<div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
 			 <br>
 				<form method="POST" action="/ProjetJEE/ServletInscription">
 				
@@ -94,6 +70,20 @@
 						<input type="submit" class="btn btn-secondary btn-lg btn-block"  value=Valider />
 					</div>
 				</form>
+				<div class="erreur">
+				<%
+					List<String> erreurs = (List<String>)request.getAttribute("erreurs");
+					if(erreurs != null && erreurs.size() > 0) {
+						out.print("<pre>");
+						out.print("<ul>");
+						for (String err : erreurs) {
+							out.print("<li>"+err+"</li>");
+						}
+						out.print("</ul>");
+						out.print("</pre>");
+					}
+				%>
+			</div>
 			</div>
 		</div>
 	</div>

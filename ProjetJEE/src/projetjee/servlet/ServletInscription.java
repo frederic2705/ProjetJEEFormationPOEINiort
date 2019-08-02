@@ -1,7 +1,8 @@
 package projetjee.servlet;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -65,27 +66,57 @@ public class ServletInscription extends HttpServlet {
 		Matcher m = p.matcher(mail);
 		boolean b = m.matches();
 		
-		if ((b == true) & (mdp.equals(mdp2)))
-		{
-			UserManager rm = new UserManager ();
-			try 
+		//Vérification de l'adresse mail dans la bdd pour éviter les doublons
+		//Recupération de la bdd
+		User user = new User();
+		UserManager us = new UserManager();
+		user.setMail(mail);
+		User userConnexion = null; 
+		
+		// Initialisation des erreurs possibles
+				List<String> erreurs = new ArrayList<String>();
+		try {
+			userConnexion = us.selectConnection(user);
+			
+			if(!user.getMail().equals(userConnexion.getMail()))
 			{
-				User userInsere = rm.ajouter(nom, prenom, mail, mdp, "user");
-			} 
-			catch (Exception e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				erreurs.add("Adresse mail déjà utilisée.");
+				
 			}
-			
-			RequestDispatcher rd = request.getRequestDispatcher("accueil");
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		if(erreurs.size()>0)
+		{
+			request.setAttribute("erreurs", erreurs);
+			RequestDispatcher rd = request.getRequestDispatcher("inscription");
 			rd.forward(request, response);
-			
 		}
 		else
 		{
-			response.sendRedirect("inscription");
+			if ((b == true) & (mdp.equals(mdp2)))
+		
+			{
+				UserManager rm = new UserManager ();
+				try 
+				{
+					User userInsere = rm.ajouter(nom, prenom, mail, mdp, "user");
+				} 
+				catch (Exception e) 
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				RequestDispatcher rd = request.getRequestDispatcher("accueil");
+				rd.forward(request, response);
+				
+			}
 		}
+		
 		
 	}
 
