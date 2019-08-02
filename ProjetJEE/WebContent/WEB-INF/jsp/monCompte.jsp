@@ -54,7 +54,7 @@
 				<div class="col-md-12">
 					<label>Mail :</label>
 					<p><%= request.getAttribute("mail") %></p>
-					<input type="email" class="form-control" id="mail" />
+					<input type="email" class="form-control" id="mail" name="mail"/>
 					<input type="submit" value="Modifier">
 				</div>
 				<div class="col-md-12">

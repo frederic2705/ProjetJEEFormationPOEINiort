@@ -66,7 +66,7 @@ public class ServletMonCompte extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("test");
+
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("currentSessionUser");
 			UserManager rm = new UserManager();
@@ -77,6 +77,7 @@ public class ServletMonCompte extends HttpServlet {
 				mail = user.getMail();
 				user.setMail(mail);
 				user.setMdp(mdp);
+				System.out.println(user.getMail());
 				try {
 					rm.update(user);
 				} catch (Exception e) {
@@ -85,12 +86,13 @@ public class ServletMonCompte extends HttpServlet {
 				}
 				
 			}
-			if(mdp == null)
+			if(mdp.equals(user.getMdp()))
 			{
 				mdp = user.getMdp();
 				user.setMdp(mdp);
 				user.setMail(mail);
 				try {
+					System.out.println(user.getMail());
 					rm.update(user);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -98,7 +100,7 @@ public class ServletMonCompte extends HttpServlet {
 				}
 				
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("accueil");
 			rd.forward(request, response);
 	}
 
