@@ -14,7 +14,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body onload="afficher(0)">
 
 <!-- Nav -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -107,7 +107,7 @@
 		    </ol>
 		
 		    <!-- Wrapper for slides -->
-		    <div class="carousel-inner">
+		    <div class="carousel-inner" onclick="afficher(1)">
 		      <div class="item thumbnail active">
 		        <img src="./img/salade_chevre_chaud.jpg" alt="Los Angeles" style="max-width:100%;">
 		      </div>
@@ -150,7 +150,7 @@
 	  </div>
 	  
 	<div class="col-md-4">
-		<div>
+		<div id="descriptif">
 			<h4>Titre</h4>
 			<p>Descriptif</p>
 		</div>
@@ -163,8 +163,8 @@
 <div class="container">
     <div class="row">
 		<div class="col-md-8">
-		<div>
-			<h4>Infos</h4>
+		<div id="infos">
+			<h4>Infos</h4><br>
 			<p>Note moyenne : </p>
 			<p>Nombre total de commande dans nos restaurants : </p>
 			<p>Commentaires : </p>
@@ -178,10 +178,20 @@
 <div class="container">
     <div class="row">
 		<div class="col-md-8">
-		<div>
+		<div id="comUser">
 			<h4>Votre évaluation : </h4>
-			<p>Note : </p>
-			<p>Commentaires : </p>
+			<form method="get" action="<%= request.getContextPath() %>/ServletNosPlats">
+			
+					<label for="noteUser">Votre note : </label>
+					<input type="number" id="noteUser" name="noteUser">
+				<br>
+				
+					<label for="comUser">Votre commentaire : </label>
+					<input type="text" id="comUser" name="comUser">
+				<br>
+					<input type="submit" value="Valider">
+				<br>				
+			</form>
 		</div>		
 	</div>
   </div>
@@ -192,7 +202,7 @@
 <div class="container">
     <div class="row">
 		<div class="col-md-8">
-		<div>
+		<div id="comAdmin">
 			<h4>Votre évaluation : </h4>
 			<p>Note : </p>
 			<p>Commentaires : </p>
@@ -201,6 +211,6 @@
   </div>
 </div>
 <!-- Fin modifs commentaires Admin -->
-
+<script type="text/javascript" src="js/restPlats.js"></script>
 </body>
 </html>
