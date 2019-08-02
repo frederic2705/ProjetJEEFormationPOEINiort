@@ -34,5 +34,8 @@ public class UserManager {
 	public User selectConnection(User user) throws Exception {
 		return this.dao.selectByMdpAndMail(user);
 	}
+	public User selectRole(User user) throws Exception {
+		return this.dao.selectByRole(user);
+	}
 
 }

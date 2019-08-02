@@ -7,6 +7,7 @@ import projetjee.bo.User;
 public interface UserDAO {
 	public void insert(User user) throws Exception;
 	public void update(User user) throws Exception;
-	public User selectByMdpAndMail(User user)throws Exception;;
-	public User select(int id)throws Exception;;
+	public User selectByMdpAndMail(User user)throws Exception;
+	public User select(int id)throws Exception;
+	public User selectByRole(User user) throws Exception;
 }

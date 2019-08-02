@@ -26,7 +26,7 @@
 		<div class="row  absolute background coin-arrondi" style="margin-left: auto; margin-right: auto">
 			<div class="col-md-12 ">
 			 <br>
-			<form method="post" action="<%= request.getContextPath()%>/ServletConnexion">
+			<form method="POST" action="<%= request.getContextPath()%>/ServletConnexion">
 				<div class="form-group">
 					<label for="email">Email : </label>
 					<input type="email" class="form-control" id="email" name="email">
