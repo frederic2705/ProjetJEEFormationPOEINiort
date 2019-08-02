@@ -65,22 +65,19 @@
 				</a>
 			</li>
 			
-			<% 
-	      	if(session.getAttribute("currentSessionUser") != null)
-	     	 {
-				out.print("<li class=\"nav-item\">");
-				out.print("<a class=\"nav-link\" href=\"monCompte\">");
-				out.print("<span class=\"glyphicon glyphicon-user\">");
-				out.print("</span>");
-				out.print("Mon compte");
-				out.print("</a>");
-				out.print("</li>");
-			}
 			
-	      %>
+	      <% if(session.getAttribute("currentSessionUser") != null) { %>
+	     	 
+				<li class="nav_item">
+				<a class="nav-link" href="<%= request.getContextPath()%>/ServletMonCompte">
+				<span class="glyphicon glyphicon-user">
+				</span>
+					Mon compte
+				</a>
+				</li>
+			<% } %>
 			
 	      </ul>
 	    </div>
-	  </div>
 	</nav>
 	
