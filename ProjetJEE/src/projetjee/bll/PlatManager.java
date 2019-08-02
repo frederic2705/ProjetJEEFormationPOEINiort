@@ -14,15 +14,16 @@ public class PlatManager {
 	{
 		this.dao = DAOFactory.getPlatDAO();
 	}
-	
-	public Plat ajouter(String nom, String ingredients, String descriptif, float prix, int quantite, Restaurant restaurant) throws Exception
+	public Plat ajouter(String nom, String ingredients, String descriptif, float prix, String image, int restoId) throws Exception
 	{
-		Plat plat = new Plat (nom, ingredients, descriptif, prix, quantite , restaurant);
+		Restaurant restaurant = new Restaurant();
+		restaurant.setId(restoId);
+		Plat plat = new Plat (nom, ingredients, descriptif, prix , image, restaurant);
+		this.dao.insert(plat);
 		return plat;
 	}
 	public List<Plat> getAll() throws Exception {
-		List<Plat> retour = null;
-		retour = dao.selectAll();
-		return retour;
+		return dao.selectAll();
 	}
+
 }

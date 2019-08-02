@@ -43,6 +43,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, user.getMail());
 			pstmt.setString(2, user.getMdp());
+			pstmt.setInt(3, user.getId());
 			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -47,7 +47,6 @@
 	  </div>
 	</nav>
 	<!-- FIN Nav -->
-
 <div class="container-fluid">
 	<div class="row" style="margin-top:50px">
 		<div class="col-md-8">
