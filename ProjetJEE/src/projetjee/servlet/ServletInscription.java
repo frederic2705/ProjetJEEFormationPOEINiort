@@ -78,10 +78,9 @@ public class ServletInscription extends HttpServlet {
 		try {
 			userConnexion = us.selectRole(user);
 			
-			if(!user.getMail().equals(userConnexion.getMail()))
+			if(user.getMail().equals(userConnexion.getMail()))
 			{
 				erreurs.add("Adresse mail déjà utilisée.");
-				
 			}
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
