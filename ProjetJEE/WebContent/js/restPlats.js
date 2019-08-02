@@ -211,10 +211,14 @@ function createComUser(element) {
 	var label2 = document.createElement("label");
 	label2.for = "comUser";
 	label2.innerHTML = "Votre commentaire : ";
-	var input2 = document.createElement("input");
-	input2.type = "text";
-	input2.id = "comUser";
-	input2.name = "comUser";
+	var textArea = document.createElement("textarea");
+	textArea.id = "text_"+element.id;
+	textArea.name = "comUser";
+	textArea.rows = "5";
+	textArea.cols = "33";
+//	textarea.value="";
+//	textarea.placeholder="Créez une nouvelle note...";
+	textArea.innerHTML = "Commentaire : " + element.contenu;
 
 	var input3 = document.createElement("input");
 	input3.type = "submit";
@@ -226,10 +230,12 @@ function createComUser(element) {
 	comUserDiv.appendChild(h4);
 	comUserDiv.appendChild(form);
 	form.appendChild(label1);
+	form.appendChild(document.createElement("br"));
 	form.appendChild(input1);
 	form.appendChild(document.createElement("br"));
 	form.appendChild(label2);
-	form.appendChild(input2);
+	form.appendChild(document.createElement("br"));
+	form.appendChild(textArea);
 	form.appendChild(document.createElement("br"));
 	form.appendChild(input3);
 	comUserDiv.appendChild(document.createElement("br"));
@@ -288,7 +294,6 @@ function ajouterCom() {
 function modifierCom(id) {
 	var xhr = createXHRForOthers();
 	var textarea = document.getElementById("text_" + id);
-	console.log(textarea.value);
 	var formulaire = "value=" + encodeURIComponent(textarea.value);
 	
 	xhr.open("PUT", "/ProjetJEE/rest/commentaires/" + id, true);

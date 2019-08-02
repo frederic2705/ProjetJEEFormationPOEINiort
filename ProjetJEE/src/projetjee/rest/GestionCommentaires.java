@@ -33,14 +33,14 @@ public class GestionCommentaires {
 		return commentaires;
 	}
 	
-//	@POST
-//	public Commentaire ajouterCommentaire(
-//			@FormParam("value") String value)
-//	{
-//		Commentaire commentaire = new Commentaire(i++, value);
-//		commentaires.add(commentaire);
-//		return commentaire;
-//	}
+	@POST
+	public Commentaire ajouterCommentaire(
+			@FormParam("value") String value)
+	{
+		Commentaire commentaire = new Commentaire();
+		commentaires.add(commentaire);
+		return commentaire;
+	}
 	
 	@PUT
 	@Path("/{id : \\d+}")
