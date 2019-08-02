@@ -46,7 +46,7 @@
 	<div class="row">
 		<div class="col-md-12 absolute">
 			<div class="row">
-			<form action="">
+			<form method="POST" action="<%= request.getContextPath()%>/ServletAjoutPlat">
 				
 				<div class="col-md-12">
 					<label for="nom">Nom :</label>
@@ -58,22 +58,30 @@
 				
 				<div class="col-md-12">
 					<label for="description">Description :</label>
-					<textarea id="description" placeholder="Une description..." rows="5" cols="80"></textarea>
+					<textarea id="description" placeholder="Une description..." rows="5" cols="80" name="description"></textarea>
 				</div>
 				
 				<div class="col-md-12">
 					<label for="ingredient">Ingredient : </label>
-					<textarea id="ingredient" placeholder="des ingredient..." rows="5" cols="80"></textarea>
+					<textarea id="ingredient" placeholder="des ingredient..." rows="5" cols="80" name="ingredient"></textarea>
 				</div>
 				
 				<div class="col-md-12">
 					<label for="prix">Prix :</label>
 					<input type="number" class="form-control" id="prix" name="prix" />	
 				</div>
-				
+								
 				<div class="col-md-12">
 					<label for="urlImg">Image :</label>
-					<input type="file" class="form-control-file" id="urlImg" />	
+					<input type="file" class="form-control-file" id="urlImg" name="img"/>	
+				</div>
+				<br>
+				<div class="col-md-12">
+					<select id="resto" name="resto">
+					    <option value="">Choisissez un restaurant</option>
+					    <option value="1">Nantes</option>
+					    <option value="2">Rennes</option>
+					</select>
 				</div>
 				<br>
 				<div class="col-md-12">
