@@ -3,7 +3,7 @@ var descriptifDiv = document.getElementById("descriptif");
 var carouselDiv = document.getElementById("carousel");
 var infoDiv = document.getElementById("infos");
 var comUserDiv = document.getElementById("comUser");
-var modifAdmin = document.getElementById("modifAdmin");
+var modifAdminDiv = document.getElementById("modifAdmin");
 
 function createXHRForAffichageCarousel() {
 	    if (window.XMLHttpRequest) {
@@ -166,14 +166,17 @@ function afficherInfo(response) {
 function createInfo(element) {
 	
 	var div1 = document.createElement("div");
-	div1.id = "commentaire_"+element.id;	
+	div1.id = "commentaire_"+element.id;
+	div1.style = "display: flex; justify-content: space-between;"
 	var p = document.createElement("p");
 	
-	p.innerHTML = " - User : " + element.user.nom + ". Commentaire : " + element.contenu + " " + element.note;
+	p.innerHTML = "- User : " + element.user.nom + ". Commentaire : " + element.contenu + " " + element.note + "&nbsp;";
 	
 	var button = document.createElement("input");
+	button.id = "button_"+element.id;
 	button.type = "button";
 	button.value = "Editer";
+	button.style = "margin-right:20px;";
 	button.onclick=function() {
 		loadModif(element.id);
 	}
@@ -235,35 +238,43 @@ function loadModif(id) {
 }
 
 function afficherModif(response) {
-	infoDiv.innerHTML = "";
-	var responseJSON = JSON.parse(response);
-	console.log(responseJSON);
-	var h4 = document.createElement("h4");
-	h4.innerHTML = "Commentaires :";
-	infoDiv.appendChild(h4);
-	for(i=0; i<responseJSON.length; i++) {
-		createModif(responseJSON[i]);
-	}
+	modifAdminDiv.innerHTML = "";
+//	var responseJSON = JSON.parse(response);
+//	for(i=0; i<responseJSON.length; i++) {
+//		createModif(responseJSON[i]);
+//	}
+	createModif(response);
 }
 
 function createModif(element) {
 	
 	var div1 = document.createElement("div");
-	div1.id = "commentaire_"+element.id;	
-	var p = document.createElement("p");
+	div1.id = "saisie_"+element.id;	
+	var textArea = document.createElement("textarea");
+	textArea.id = "text_"+element.id;
+	textArea.rows = "5";
+	textArea.cols = "33";
+	textArea.innerHTML = "Commentaire : " + element.contenu;
 	
-	p.innerHTML = " - user : " + element.user.nom + ". Commentaire : " + element.contenu + " ";
-	
-	var button = document.createElement("input");
-	button.type = "button";
-	button.value = "Editer";
-	button.onclick=function() {
+	var button1 = document.createElement("input");
+	button1.type = "button";
+	button1.value = "Modifier";
+	button1.onclick=function() {
 		loadModif(element.id);
 	}
 	
-	modifAdmin.appendChild(div1);
-	modifAdmin.appendChild(p);
-	p.appendChild(button);
+	var button2 = document.createElement("input");
+	button2.type = "button";
+	button2.value = "Supprimer";
+	button2.onclick=function() {
+		loadModif(element.id);
+	}
+	
+	modifAdminDiv.appendChild(div1);
+	modifAdminDiv.appendChild(textArea);
+	modifAdminDiv.appendChild(document.createElement("br"));
+	modifAdminDiv.appendChild(button1);
+	modifAdminDiv.appendChild(button2);
 }
 
 function createNoteList(element) {

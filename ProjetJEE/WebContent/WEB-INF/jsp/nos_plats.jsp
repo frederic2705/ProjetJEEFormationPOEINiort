@@ -94,7 +94,7 @@
 <div class="container">
     <div class="row">
 		<div class="col-md-8">
-		<div id="comUser">
+		<div id="modifAdmin">
 		</div>		
 	</div>
   </div>
@@ -105,7 +105,7 @@
 <div class="container">
     <div class="row">
 		<div class="col-md-8">
-		<div id="modifAdmin">
+		<div id="comUser">
 		</div>		
 	</div>
   </div>
