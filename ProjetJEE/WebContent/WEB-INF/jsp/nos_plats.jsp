@@ -7,16 +7,48 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%@ page import="projetjee.bo.User" %>  
+  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
+<body onload="loadCarousel()">
 
-<body onload="afficher(0)">
-<%@ include file="navbar.jsp" %>
+<!-- Nav -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" 
+	  aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarText">
+	    <ul class="navbar-nav mr-auto">
+	    
+	      <li class="nav-item">
+	        <a class="nav-link" href="accueil">Accueil <span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item active">
+	        <a class="nav-link" href="nos_plats">Nos plats</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="connexion">Connexion</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="inscription">Inscription</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="monCompte">Mon Compte</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="ajouterUnPlat">Ajouter un plat</a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+	<!-- FIN Nav -->
+
 <!-- Carousel et descriptif -->
 <div class="container">
     <div class="row">
