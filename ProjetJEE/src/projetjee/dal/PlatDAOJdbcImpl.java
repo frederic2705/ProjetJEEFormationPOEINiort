@@ -13,7 +13,7 @@ import projetjee.bo.Plat;
 public class PlatDAOJdbcImpl implements PlatDAO {
 	
 	public static final String INSERT="INSERT INTO PLATS (nom, ingredients, descriptif, prix, img, restos_id) VALUES (?,?,?,?,?,?);";
-	public static final String SELECTALL="SELECT nom,ingredients,descriptif,prix,img FROM PLATS;";
+	public static final String SELECTALL="SELECT id,nom,ingredients,descriptif,prix,img FROM PLATS;";
 	
 	public void insert(Plat plat) {
 		try(Connection cnx = ConnectionProvider.getConnection())
@@ -49,9 +49,10 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 			while(rs.next()) {
 				
 				Plat tmp = new Plat();
+				tmp.setId( rs.getInt("id"));
 				tmp.setNom( rs.getString("nom"));
 				tmp.setIngredients(rs.getString("ingredients"));
-				tmp.setDescriptif(rs.getString("descritif"));
+				tmp.setDescriptif(rs.getString("descriptif"));
 				tmp.setPrix(rs.getFloat("prix"));
 				tmp.setImage(rs.getString("img"));
 				plats.add(tmp);
