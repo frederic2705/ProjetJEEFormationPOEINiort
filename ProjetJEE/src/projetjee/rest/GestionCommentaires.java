@@ -65,7 +65,7 @@ public class GestionCommentaires {
 	
 	@DELETE
 	@Path("/{id : \\d+}")
-	public boolean Commentaire(@PathParam("id") int id)
+	public boolean Commentaire(@PathParam("id") int id) throws Exception
 	{
 		Commentaire commentaireASupprimer = null;
 		for(Commentaire com : commentaires)
@@ -73,6 +73,7 @@ public class GestionCommentaires {
 			if(com.getId()==id)
 			{
 				commentaireASupprimer=com;
+				cm.supprimerCommentaire(commentaireASupprimer);
 				break;
 			}
 		}

@@ -300,5 +300,6 @@ function modifierCom(id) {
 function supprimerCom(id) {
 	var xhr = createXHRForOthers();
 	xhr.open("DELETE", "/ProjetJEE/rest/commentaires/" + id, true);
+	modifAdminDiv.remove();
 	xhr.send(null);
 }
