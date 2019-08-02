@@ -58,11 +58,7 @@ public class ServletConnexion extends HttpServlet {
 		String mail = request.getParameter("email");
 		String mdp = request.getParameter("mdp");
 		User user = new User(); 
-		
-		//test de récupération
-		System.out.println(mail);
-		System.out.println(mdp);
-		
+				
 		/*if((mail.equals("")) && (mdp.equals("")))
 		{
 			erreurs.add("Veuillez, saisir un mail et un mot de passe.");
@@ -73,10 +69,11 @@ public class ServletConnexion extends HttpServlet {
 		UserManager rm = new UserManager();
 		user.setMail(mail);
 		user.setMdp(mdp);
-		User userConnexion = null; 
+		String error = null;
+		User userConnexion = null;
 		try {
 			
-			userConnexion = rm.selectConnection(user);
+			 userConnexion = rm.selectConnection(user);
 			
 			if((user.getMail().equals("")) && (user.getMdp().equals("")))
 			{
@@ -123,9 +120,6 @@ public class ServletConnexion extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setMaxInactiveInterval(10*60);
 			session.setAttribute("currentSessionUser", userConnexion);
-			System.out.println(session.getAttribute("currentSessionUser"));
-			
-			
 			RequestDispatcher rd = request.getRequestDispatcher("accueil");
 			rd.forward(request, response);
 		}

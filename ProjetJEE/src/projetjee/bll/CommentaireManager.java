@@ -45,10 +45,10 @@ public class CommentaireManager
 		return retour;
 	}
 	
-	public List<Commentaire> getCommentairesParPlat(Plat plat) throws Exception
+	public List<Commentaire> getCommentairesParPlat(int id) throws Exception
 	{
 		List<Commentaire> retour = null;		
-		retour = commentaireDAO.selectAllByPlat(plat);		
+		retour = commentaireDAO.selectAllByPlat(id);		
 		return retour;
 	}
 }

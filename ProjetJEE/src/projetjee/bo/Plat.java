@@ -28,6 +28,17 @@ public class Plat
 		this.setRestaurant(restaurant);
 	}
 	
+	public Plat(int id, String nom, String ingredients, String descriptif, float prix, String image, Restaurant restaurant)
+	{
+		this.setId(id);
+		this.setNom(nom);
+		this.setIngredients(ingredients);
+		this.setDescriptif(descriptif);
+		this.setPrix(prix);
+		this.setImage(image);
+		this.setRestaurant(restaurant);
+	}
+	
 	public Plat(String nom, String ingredients, String descriptif, float prix, String image, int quantite, Restaurant restaurant)
 	{
 		this.setNom(nom);
@@ -36,6 +47,16 @@ public class Plat
 		this.setPrix(prix);
 		this.setImage(image);
 		this.quantite = quantite;
+		this.setRestaurant(restaurant);
+	}
+	
+	public Plat(String nom, String ingredients, String descriptif, float prix, String image, Restaurant restaurant)
+	{
+		this.setNom(nom);
+		this.setIngredients(ingredients);
+		this.setDescriptif(descriptif);
+		this.setPrix(prix);
+		this.setImage(image);
 		this.setRestaurant(restaurant);
 	}
 	
@@ -48,6 +69,16 @@ public class Plat
 		this.quantite = quantite;
 		this.setRestaurant(restaurant);
 	}
+	
+	public Plat(String nom, String ingredients, String descriptif, float prix, Restaurant restaurant)
+	{
+		this.setNom(nom);
+		this.setIngredients(ingredients);
+		this.setDescriptif(descriptif);
+		this.setPrix(prix);
+		this.setRestaurant(restaurant);
+	}
+
 
 	public int getId() 
 	{

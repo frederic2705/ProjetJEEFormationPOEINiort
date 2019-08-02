@@ -12,5 +12,5 @@ public interface CommentaireDAO
 	public void update(Commentaire commentaire) throws Exception;
 	public void delete(Commentaire commentaire) throws Exception;
 	public List<Commentaire> selectAllByUser(User user) throws Exception;
-	public List<Commentaire> selectAllByPlat(Plat plat) throws Exception;
+	public List<Commentaire> selectAllByPlat(int id) throws Exception;
 }

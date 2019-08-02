@@ -12,8 +12,8 @@ import projetjee.bo.Plat;
 
 public class PlatDAOJdbcImpl implements PlatDAO {
 	
-	public static final String INSERT="INSERT INTO PLATS (nom, ingredients, descriptif, prix, img) (?,?,?,?,?);";
-	public static final String SELECTALL="SELECT (nom,ingredients,descriptif,prix,img) FROM PLATS;";
+	public static final String INSERT="INSERT INTO PLATS (nom, ingredients, descriptif, prix, img, restos_id) VALUES (?,?,?,?,?,?);";
+	public static final String SELECTALL="SELECT nom,ingredients,descriptif,prix,img FROM PLATS;";
 	
 	public void insert(Plat plat) {
 		try(Connection cnx = ConnectionProvider.getConnection())
@@ -24,6 +24,7 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 			pstmt.setString(3, plat.getDescriptif());
 			pstmt.setFloat(4, plat.getPrix());
 			pstmt.setString(5, plat.getImage());
+			pstmt.setInt(6, plat.getRestaurant().getId());
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if(rs.next())

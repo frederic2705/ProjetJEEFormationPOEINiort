@@ -19,16 +19,18 @@ public class CommentaireDAOJdbcImpl implements CommentaireDAO
 	
 	private static final String DELETE = "DELETE FROM COMMENTAIRES WHERE id = ?;";
 	
-	private static final String SELECT_ALL_BY_USER = "SELECT COMMENTAIRES.id, commentaire, users_id, plats_id, note, date,"
-			+ "USERS.id, USERS.nom, prenom, mail, mdp, PLATS.id, PLATS.nom, ingredients, descriptif, prix, PLATS.img, restos_id"
-			+ "RESTOS.id, RESTOS.nom, adresse, RESTOS.img, ROLES.id, ROLES.nom"
-			+ "FROM COMMENTAIRES, USERS, PLATS, RESTOS, ROLES"
+	private static final String SELECT_ALL_BY_USER = "SELECT COMMENTAIRES.id as idCommentaire, commentaire, users_id, plats_id, note, date, "
+			+ "USERS.id as idUser, USERS.nom as nomUser, prenom, mail, mdp, "
+			+ "PLATS.id as idPlat, PLATS.nom as nomPlat, ingredients, descriptif, prix, PLATS.img as imgPlat, restos_id, "
+			+ "RESTOS.id as idResto, RESTOS.nom as nomResto, adresse, RESTOS.img as imgResto, ROLES.id as idRole, ROLES.nom as nomRole "
+			+ "FROM COMMENTAIRES, USERS, PLATS, RESTOS, ROLES "
 			+ "WHERE roles_id = ROLES.id AND users_id = USERS.id AND COMMENTAIRES.plats_id = PLATS.id AND restos_id = RESTOS.id AND users_id = ?;";
 	
-	private static final String SELECT_ALL_BY_PLAT = "SELECT COMMENTAIRES.id, commentaire, users_id, plats_id, note, date,"
-			+ "USERS.id, USERS.nom, prenom, mail, mdp, PLATS.id, PLATS.nom, ingredients, descriptif, prix, PLATS.img, restos_id"
-			+ "RESTOS.id, RESTOS.nom, adresse, RESTOS.img, ROLES.id, ROLES.nom"
-			+ "FROM COMMENTAIRES, USERS, PLATS, RESTOS, ROLES"
+	private static final String SELECT_ALL_BY_PLAT = "SELECT COMMENTAIRES.id as idCommentaire, commentaire, users_id, plats_id, note, date, "
+			+ "USERS.id as idUser, USERS.nom as nomUser, prenom, mail, mdp, "
+			+ "PLATS.id as idPlat, PLATS.nom as nomPlat, ingredients, descriptif, prix, PLATS.img as imgPlat, restos_id, "
+			+ "RESTOS.id as idResto, RESTOS.nom as nomResto, adresse, RESTOS.img as imgResto, ROLES.id as idRole, ROLES.nom as nomRole "
+			+ "FROM COMMENTAIRES, USERS, PLATS, RESTOS, ROLES "
 			+ "WHERE roles_id = ROLES.id AND users_id = USERS.id AND COMMENTAIRES.plats_id = PLATS.id AND restos_id = RESTOS.id AND plats_id = ?;";
 	
 	public void insert(Commentaire commentaire) throws Exception 
@@ -124,9 +126,9 @@ public class CommentaireDAOJdbcImpl implements CommentaireDAO
 			while(rs.next())
 			{			
 				//User user = new User(rs.getInt("USERS.id"), rs.getString("USERS.nom"), rs.getString("USERS.prenom"), rs.getString("mail"), rs.getString("mdp"), rs.getString("ROLES.nom"));
-				Restaurant resto = new Restaurant(rs.getInt("RESTOS.id"), rs.getString("nom"), rs.getString("adresse"), rs.getString("RESTOS.img"));
-				Plat plat = new Plat(rs.getInt("PLATS.id"), rs.getString("PLATS.nom"), rs.getString("ingredients"), rs.getString("descriptif"), rs.getFloat("prix"), rs.getString("img"), rs.getInt("quantite"), resto);
-				retour = new Commentaire(rs.getInt("id"), rs.getString("commentaire"), rs.getInt("note"), rs.getDate("date"), plat, user);
+				Restaurant resto = new Restaurant(rs.getInt("idResto"), rs.getString("nomResto"), rs.getString("adresse"), rs.getString("imgResto"));
+				Plat plat = new Plat(rs.getInt("idPlat"), rs.getString("nomPlat"), rs.getString("ingredients"), rs.getString("descriptif"), rs.getFloat("prix"), rs.getString("imgPlat"), resto);
+				retour = new Commentaire(rs.getInt("idCommentaire"), rs.getString("commentaire"), rs.getInt("note"), rs.getDate("date"), plat, user);
 				
 				retourListe.add(retour);
 			}
@@ -140,31 +142,25 @@ public class CommentaireDAOJdbcImpl implements CommentaireDAO
 		return retourListe;
 	}	
 	
-	public List<Commentaire> selectAllByPlat(Plat plat) throws Exception
+	public List<Commentaire> selectAllByPlat(int id) throws Exception
 	{
 		List<Commentaire> retourListe = new ArrayList<Commentaire>();
 		Commentaire retour = null;
 		PreparedStatement pstmt = null;
 		
-		if(plat == null)
-		{
-			Exception exception = new Exception();
-			throw exception;
-		}
-		
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{			
 			pstmt = cnx.prepareStatement(SELECT_ALL_BY_PLAT);
-			pstmt.setInt(1, plat.getId());
+			pstmt.setInt(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next())
 			{			
-				User user = new User(rs.getInt("USERS.id"), rs.getString("USERS.nom"), rs.getString("USERS.prenom"), rs.getString("mail"), rs.getString("mdp"), rs.getString("ROLES.nom"));
-				Restaurant resto = new Restaurant(rs.getInt("RESTOS.id"), rs.getString("nom"), rs.getString("adresse"), rs.getString("RESTOS.img"));
-				//Plat plat = new Plat(rs.getInt("PLATS.id"), rs.getString("PLATS.nom"), rs.getString("ingredients"), rs.getString("descriptif"), rs.getFloat("prix"), rs.getString("img"), rs.getInt("quantite"), resto);
-				retour = new Commentaire(rs.getInt("id"), rs.getString("commentaire"), rs.getInt("note"), rs.getDate("date"), plat, user);
-				
+				User user = new User(rs.getInt("idUser"), rs.getString("nomUser"), rs.getString("prenom"), rs.getString("mail"), rs.getString("mdp"), rs.getString("nomRole"));
+				Restaurant resto = new Restaurant(rs.getInt("idResto"), rs.getString("nomResto"), rs.getString("adresse"), rs.getString("imgResto"));
+				Plat plat = new Plat(rs.getInt("idPlat"), rs.getString("nomPlat"), rs.getString("ingredients"), rs.getString("descriptif"), rs.getFloat("prix"), rs.getString("imgPlat"), resto);
+				retour = new Commentaire(rs.getInt("idCommentaire"), rs.getString("commentaire"), rs.getInt("note"), rs.getDate("date"), plat, user);
+
 				retourListe.add(retour);
 			}
 		}

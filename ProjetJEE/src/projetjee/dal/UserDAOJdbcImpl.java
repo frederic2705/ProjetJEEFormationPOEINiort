@@ -13,10 +13,9 @@ import projetjee.bo.User;
 public class UserDAOJdbcImpl implements UserDAO {
 	public static final String INSERT="INSERT INTO USERS (nom, prenom, mail, mdp, roles_id) VALUES (?,?,?,?,?);";
 	private static final String UPDATE = "UPDATE USERS set mail=? , mdp=? where id=?";
-	private static final String SELECT="SELECT (mail, mdp) FROM USERS;";
-	private static final String SELECT_BY_MDP_MAIL="SELECT ROLES.nom as nomRole, mail, mdp FROM USERS,ROLES WHERE roles_id=ROLES.id AND mail = ? AND mdp = ?; ";
-	
-	
+  private static final String SELECT_BY_ROLE="SELECT ROLES.nom as nomRole, mail, mdp FROM USERS,ROLES WHERE roles_id=ROLES.id AND mail = ? AND mdp = ?; ";
+	private static final String SELECT_BY_MDP_MAIL="SELECT id, mail, mdp FROM USERS WHERE mail = ? AND mdp = ?; ";
+	private static final String SELECT="SELECT nom, prenom, mail, mdp FROM USERS where id=?;"; 
 	
 	public void insert(User user) throws Exception {
 		try(Connection cnx = ConnectionProvider.getConnection())
@@ -44,29 +43,26 @@ public class UserDAOJdbcImpl implements UserDAO {
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, user.getMail());
 			pstmt.setString(2, user.getMdp());
+			pstmt.setInt(3, user.getId());
 			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public List<User> select(User user)
+public User select(int id)
 	{
-		List<User> users = new ArrayList<>();
+		User users = null;
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT, PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, user.getMail());
-			pstmt.setString(2, user.getMdp());
+			pstmt.setInt(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			
 		
 			while(rs.next()) {
 				
-				User tmp = new User();
-				tmp.setMail( rs.getString("mail"));
-				tmp.setMdp(rs.getString("mdp"));
-				users.add(tmp);
+				users = new User(id,  rs.getString("nom"), rs.getString("prenom"), rs.getString("mail"), rs.getString("mdp"), "user");				
 				}
 				
 			} catch (SQLException e) {
@@ -81,6 +77,30 @@ public class UserDAOJdbcImpl implements UserDAO {
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_MDP_MAIL, PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, user.getMail());
+			pstmt.setString(2, user.getMdp());
+			ResultSet rs = pstmt.executeQuery();
+			user = new User();
+			if(rs.next())
+			{
+				user.setId(rs.getInt("id"));
+				user.setMail(rs.getString("mail"));
+				user.setMdp(rs.getString("mdp"));
+			}
+			
+			
+	}catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		return user;
+	}
+	
+  public User selectByRole(User user)
+	{
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_ROLE, PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			pstmt.setString(1, user.getMail());
 			pstmt.setString(2, user.getMdp());
@@ -101,6 +121,4 @@ public class UserDAOJdbcImpl implements UserDAO {
 		return user;
 	}
 	
-	
 }
-
