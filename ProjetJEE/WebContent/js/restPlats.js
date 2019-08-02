@@ -216,9 +216,9 @@ function createComUser(element) {
 	textArea.name = "comUser";
 	textArea.rows = "5";
 	textArea.cols = "33";
-//	textarea.value="";
+//	textarea.innerHTML="";
 //	textarea.placeholder="Créez une nouvelle note...";
-	textArea.innerHTML = "Commentaire : " + element.contenu;
+//	textArea.innerHTML = "Commentaire : " + element.contenu;
 
 	var input3 = document.createElement("input");
 	input3.type = "submit";
